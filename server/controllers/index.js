@@ -10,3 +10,5 @@ module.exports.displayIndexPage = (req, res, next) => {
 module.exports.displayErrorPage = (req, res, next) => {
     res.render('error', {title: "Error"});
 }
+
+
