@@ -1,6 +1,6 @@
 let mongoose = require ('mongoose');
 
-// create answer model
+//create answer model
 let answerModel = mongoose.Schema({
   answerValue: String,
   surveyID: String,
