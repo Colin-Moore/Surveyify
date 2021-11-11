@@ -2,9 +2,9 @@ let mongoose = require('mongoose');
 
 //create survey class
 let surveyModel = mongoose.Schema({
+  surveyName: String,
   author: String,
-  surveyType: String,
-  expirationDate: String
+  expirationDate: String  //TODO change to datetime variable. String type placeholder for now
 },
 {
   collection: "surveys"
