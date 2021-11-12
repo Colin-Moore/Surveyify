@@ -1,0 +1,13 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+// Create your own map
+$custom-colors: (
+  "lightblue": #DDE7EF,
+  "mildblue": #A7BED0
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+body {
+    background-color: #DDE7EF ;
+}
