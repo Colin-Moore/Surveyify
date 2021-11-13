@@ -1,0 +1,24 @@
+.addSurvey{
+    text-align: center;
+}
+input, label{
+    display:block;
+}
+label{
+    text-align:center;
+    padding:20px;
+    font-size:14pt;
+    font-weight:bold;
+}
+input{
+    padding:5px;
+    border-radius: 7px;
+    width: 500px;
+    margin-left:auto;
+    margin-right:auto;
+}
+hr{
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
