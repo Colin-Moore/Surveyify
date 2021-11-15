@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SurveyService {
 
-  uri = 'http://localhost:4000';
+  uri = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
