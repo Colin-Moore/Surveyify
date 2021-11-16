@@ -1,0 +1,51 @@
+{
+  "name": "comp229-assign2",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "engines": {
+    "node": "^12.0.0",
+    "npm": "^6.0.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "bootstrap": "^5.1.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.2",
+    "http-errors": "~1.6.3",
+    "jquery": "^3.6.0",
+    "mongoose": "^6.0.9",
+    "morgan": "~1.9.1",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
+    "popper.js": "^1.16.1"
+  },
+  "description": "express portfolio website",
+  "main": "server.js",
+  "devDependencies": {
+    "@types/connect-flash": "0.0.37",
+    "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
+    "@types/mongoose": "^5.11.97",
+    "@types/passport": "^1.0.7",
+    "@types/passport-local": "^1.0.34",
+    "@types/passport-local-mongoose": "^6.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwestaway/COMP229-assign2.git"
+  },
+  "author": "Melissa Westaway",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwestaway/COMP229-assign2/issues"
+  },
+  "homepage": "https://github.com/mwestaway/COMP229-assign2#readme"
+}
