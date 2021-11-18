@@ -20,11 +20,14 @@
             <td class="text-center col-2"><%= SurveyList[count].author %></td>
             <td class="text-center col-2"><%= SurveyList[count].surveyName %></td>
             <td class="text-center col-2"><%= SurveyList[count].expirationDate %></td>
-            <td class="text-center col-3">
+            <td class="text-center col-2">
               <a href="survey-list/update/<%=SurveyList[count]._id%>" class="btn btn-warning">Update</a>
             </td>
-            <td class="text-center col-3">
+            <td class="text-center col-2">
               <a href="/survey-list/delete/<%=SurveyList[count]._id%>" class="btn btn-danger">Delete</a>
+            </td>
+            <td class="text-center col-2">
+              <a href="/survey-list/view/<%=SurveyList[count]._id%>" class="btn btn-primary">View</a>
             </td>
           </tr>
         <% } %>

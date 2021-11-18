@@ -22,4 +22,13 @@ router.post("/update/:id", surveyController.processUpdatePage);
 /* GET route to perform deletion - DELETE Operation */
 router.get("/delete/:id", surveyController.performDelete);
 
+/* GET route for displaying ADD QUESTION page */
+router.get("/question/:id", surveyController.displayQuestionPage);
+
+/* POST route for ADD QUESTION page - CREATE operation */
+router.post("/question/:id", surveyController.processQuestionPage);
+
+/* GET route for displaying VIEW page - READ */
+router.get("/view/:id", surveyController.showSurvey);
+
 module.exports = router;
