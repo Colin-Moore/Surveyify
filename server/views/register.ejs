@@ -1,0 +1,45 @@
+<%- include partials/header.ejs %>
+
+<%- include partials/main-nav.ejs %>
+
+<main class="container center">
+
+  <div class="card" style="width: 16rem; height: 20rem;">
+
+      <h1 class="title"><%- title %></h1>
+      <form  class="justify-content-center" method="POST" autocomplete="off">
+        <fieldset class="form-group">
+            <input type="text" class="form-control-sm"
+            name="username" placeholder="Username"
+            id="username" required autofocus>
+        </fieldset>
+        <br>
+        <fieldset></fieldset>
+            <input type="email" class="form-control-sm btn-sm text-alin-center"
+            name="email" placeholder="Email"
+            id="email" required autofocus>
+        </fieldset>
+        <br>
+        <fieldset></fieldset>
+        <input type="password" class="form-control-sm btn-sm text-alin-center"
+        name="password" placeholder="Password"
+        id="password" required autofocus>
+    </fieldset>
+
+
+
+    <br>
+    <div class="col-md-12 text-center">
+        <a class="btn btn-outline-primary text-center" href="#" type="submit" value="Login">Sign Up</a>
+        <a class="btn btn-outline-danger" href="#" type="submit" value="Login">Cancel</a>
+    </div>
+      <br>
+      <br>
+    </form>
+
+    </div>
+
+</main>
+<%- include partials/bottom-nav.ejs %> 
+
+<%- include partials/footer %>
