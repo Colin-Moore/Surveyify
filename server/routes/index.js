@@ -3,8 +3,6 @@ let router = express.Router();
 
 let indexController = require("../controllers/index");
 
-
-
 /* GET home page. */
 router.get("/", indexController.displayHomePage);
 router.get("/home", indexController.displayHomePage);
@@ -15,10 +13,19 @@ router.get("/about", indexController.displayAboutPage);
 /* GET contact us page. */
 router.get("/contact", indexController.displayContactPage);
 
-/* GET Login us page. */
+/* GET Login page. */
 router.get("/login", indexController.displayLoginPage);
 
-/* GET register us page. */
+/* POST Route for processing the Login page */
+router.post("/login", indexController.processLoginPage);
+
+/* GET register page. */
 router.get("/register", indexController.displayRegisterPage);
+
+/* POST Route for processing the Register page */
+router.post("/register", indexController.processRegisterPage);
+
+/* GET Route to perform Logout */
+router.get("/logout", indexController.performLogout);
 
 module.exports = router;

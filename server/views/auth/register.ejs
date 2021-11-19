@@ -1,0 +1,42 @@
+<%- include ../partials/header.ejs %>
+
+<%- include ../partials/main-nav.ejs %>
+
+<main class="container center">
+    <!-- Message Area-->
+    <%if(messages.length> 0) {%>
+        <div class="alert alert-danger">
+            <%=messages %>
+        </div>
+    <%}%>
+    
+  <div class="card" style="width: 16rem; height: 20rem;">
+      <h1 class="title"><%- title %></h1>
+      <form  class="justify-content-center" method="POST" autocomplete="off">
+        <fieldset class="form-group">
+            <input type="text" class="form-control-sm" name="username" placeholder="Username" id="username" required autofocus>
+        </fieldset>
+        <br>
+        <fieldset class="form-group">
+            <input type="email" class="form-control-sm" name="email" placeholder="Email" id="email" required autofocus>
+        </fieldset>
+        <br>
+        <fieldset class="form-group">
+            <input type="password" class="form-control-sm" name="password" placeholder="Password" id="password" required autofocus>
+        </fieldset>
+        <br>
+        <fieldset class="form-group text-center">
+            <input type="submit" class="btn btn-outline-primary" value="Sign Up">
+            <a href="/">
+                <input type="button" class="btn btn-outline-danger" value="Cancel">
+            </a>
+        </fieldset>
+
+    </form>
+
+    </div>
+
+</main>
+<%- include ../partials/bottom-nav.ejs %> 
+
+<%- include ../partials/footer %>
