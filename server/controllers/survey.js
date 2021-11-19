@@ -100,6 +100,24 @@ module.exports.processAddPage = (req, res, next) => {
   });
 };
 
+module.exports.processSavePage = (req, res, next) => {
+  let newSurvey = Survey({
+    surveyName: req.body.surveyName,
+    author: req.body.author,
+    expirationDate: req.body.expirationDate,
+  });
+
+  Survey.create(newSurvey, (err, Survey) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refresh
+      res.redirect("/survey-list/update/" + Survey._id);
+    }
+  });
+};
+
 module.exports.displayUpdatePage = (req, res, next) => {
   let id = req.params.id;
 
