@@ -13,6 +13,9 @@ router.get("/add", surveyController.displayAddPage);
 /* POST route for processing ADD page - CREATE Operation */
 router.post("/add", surveyController.processAddPage);
 
+/* POST route for processing SAVE page - CREATE Operation */
+router.post("/save", surveyController.processSavePage);
+
 /* GET route for processing UPDATE page - UPDATE Operation */
 router.get("/update/:id", surveyController.displayUpdatePage);
 
