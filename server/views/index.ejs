@@ -1,47 +1,53 @@
 <%- include partials/header.ejs %>
 
-<%- include partials/main-nav.ejs %>
+  <%- include partials/main-nav.ejs %>
 
-<main class="container">
-  <div class="row mt-5">
-    <div class="text-center col-md-12 mt-5">
-      <h1><%- title %></h1>
+    <main class="container">
+      <div class="row mt-5">
+        <div class="text-center col-md-12 mt-5">
+          <h1>
+            <%- title %>
+          </h1>
 
-      <table class="table table-bordered table-striped table-hover mt-5" style="background-color: #91A5B5; border-radius: 20px;">
-        <tr class="d-flex">
-          <th class="text-center col-2">Creator</th>
-          <th class="text-center col-2">Title</th>
-          <th class="text-center col-2">Expires</th>
-          <th class="text-center col-6">Operations</th>
-        </tr>
+          <table class="table table-bordered table-striped table-hover mt-5"
+            style="background-color: #91A5B5; border-radius: 20px;">
+            <tr class="d-flex">
+              <th class="text-center col-2">Creator</th>
+              <th class="text-center col-2">Title</th>
+              <th class="text-center col-2">Expires</th>
+              <th class="text-center col-6">Operations</th>
+            </tr>
 
-        <% for(let count=0; count < SurveyList.length; count++) { %>
-          <tr class="d-flex">
-            <td class="text-center col-2"><%= SurveyList[count].author %></td>
-            <td class="text-center col-2"><%= SurveyList[count].surveyName %></td>
-            <td class="text-center col-2"><%= SurveyList[count].expirationDate %></td>
-            <td class="text-center col-2">
-              <a href="survey-list/update/<%=SurveyList[count]._id%>" class="btn btn-warning">Update</a>
-            </td>
-            <td class="text-center col-2">
-              <a href="survey-list/delete/<%=SurveyList[count]._id%>" class="btn btn-danger">Delete</a>
-            </td>
-            <td class="text-center col-2">
-              <a href="survey-list/view/<%=SurveyList[count]._id%>" class="btn btn-primary">View</a>
-            </td>
-          </tr>
-        <% } %>
-      </table>
+            <% for(let count=0; count < SurveyList.length; count++) { %>
+              <tr class="d-flex">
+                <td class="text-center col-2">
+                  <%= SurveyList[count].author %>
+                </td>
+                <td class="text-center col-2">
+                  <%= SurveyList[count].surveyName %>
+                </td>
+                <td class="text-center col-2">
+                  <%= SurveyList[count].expirationDate %>
+                </td>
+                <td class="text-center col-2">
+                  <a href="survey-list/update/<%=SurveyList[count]._id%>" class="btn btn-warning">Update</a>
+                </td>
+                <td class="text-center col-2">
+                  <a href="/survey-list/delete/<%=SurveyList[count]._id%>" class="btn btn-danger">Delete</a>
+                </td>
+                <td class="text-center col-2">
+                  <a href="/survey-list/view/<%=SurveyList[count]._id%>" class="btn btn-primary">View</a>
+                </td>
+              </tr>
+              <% } %>
+          </table>
 
-      <a href="survey-list/add" class="btn btn-primary">Add a survey</a>
-    </div>
-  </div>
-</main>
+          <a href="survey-list/add" class="btn btn-primary" style="background-color: 
+      #91A5B5; border: none;">Add a survey</a>
+        </div>
+      </div>
+    </main>
 
-<%- include partials/bottom-nav.ejs %> 
+    <%- include partials/bottom-nav.ejs %>
 
-<%- include partials/footer %>
-
-
-    
-
+      <%- include partials/footer %>
