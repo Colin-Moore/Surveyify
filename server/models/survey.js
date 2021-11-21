@@ -4,7 +4,7 @@ let mongoose = require("mongoose");
 let surveyModel = mongoose.Schema(
   {
     surveyName: String,
-    authorID: String,
+    userID: String,
     description: String,
     expirationDate: Date, //TODO String type placeholder for now. change to datetime?
   },
