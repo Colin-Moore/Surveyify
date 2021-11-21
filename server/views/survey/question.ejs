@@ -1,0 +1,47 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/main-nav.ejs %>
+
+<!--Add Page-->
+<main>
+    <div class="container">
+        <div class="glass row">
+            <div class="offset-md-3 col-md-6">
+                <h1>
+                    <%= title %>
+                </h1>
+                
+                <form class="form" method="POST">
+                    <div class="form-group">
+                        <label for="questionTextField">Question</label>
+                        <input type="text" class="form-control" id="questionTextField" placeholder="Enter question" name="surveyQuestion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="choiceOneTextField">Selection 1</label>
+                        <input type="text" class="form-control" id="choiceOneTextField" placeholder="Enter answer" name="answerOne" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="choiceTwoTextField">Selection 2</label>
+                        <input type="text" class="form-control" id="choiceTwoTextField" placeholder="Enter answer" name="answerTwo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="choiceThreeTextField">Selection 3</label>
+                        <input type="text" class="form-control" id="choiceThreeTextField" placeholder="Enter answer" name="answerThree" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="choiceFourTextField">Selection 4</label>
+                        <input type="text" class="form-control" id="choiceFourTextField" placeholder="Enter answer" name="answerFour" required>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-save"></i> Add Question
+                    </button>
+                    <a href="/home" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</a>
+                    <a href="" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include ../partials/bottom-nav.ejs %>
+<%- include ../partials/footer.ejs %>

@@ -1,0 +1,23 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/main-nav.ejs %>
+ <h1> Survey Questions </h1>
+<main class="container">
+  <div class="row">
+    <div class="text-center col-md-2">
+      <!-- NOT PRETTY!  JUST PROOF OF CONCEPT-->
+     
+        <% for(let count=0; count < QuestionList.length; count++) { %>
+          <h3>Question <%= count + 1 %></h3>
+        <input type="text" value="<%= QuestionList[count].surveyQuestion %>"></input>
+        <input type="text" value="<%= QuestionList[count].answerOne %>"></input>
+        <input type="text" value="<%= QuestionList[count].answerTwo %>"></input>
+        <input type="text" value="<%= QuestionList[count].answerThree %>"></input>
+        <input type="text" value="<%= QuestionList[count].answerFour %>"></input>
+      <% } %>
+
+    </div>
+  </div>
+</main>
+
+<%- include ../partials/bottom-nav.ejs %>
+<%- include ../partials/footer.ejs %>
