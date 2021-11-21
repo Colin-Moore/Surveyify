@@ -30,3 +30,17 @@ module.exports.displayContactPage = (req, res, next) => {
     title: "Contact",
   });
 };
+
+module.exports.displayLoginPage = (req, res, next) => {
+  res.render("login", {
+    title: "Login",
+  });
+};
+
+module.exports.displayRegisterPage = (req, res, next) => {
+  res.render("register", {
+    title: "Registration",
+  });
+};
+
+
