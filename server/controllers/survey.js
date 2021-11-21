@@ -12,20 +12,18 @@ module.exports.displaySurveyList = (req, res, next) => {
       return console.error(err);
     } else {
       console.log(surveyList);
-      res.render("survey/list", {
-        title: "Surveys",
+      res.render("survey/survey-list", {
+        title: "My Surveys",
         SurveyList: surveyList,
+        username: req.user ? req.user.username : "",
       });
     }
   });
 };
 
-
-
 module.exports.showSurvey = (req, res, next) => {
   let id = req.params.id;
-  Question.find({ surveyId: id}, (err, questionList)=>
-  {
+  Question.find({ surveyId: id }, (err, questionList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -33,12 +31,13 @@ module.exports.showSurvey = (req, res, next) => {
       res.render("survey/view", {
         title: "Surveys",
         QuestionList: questionList,
+        username: req.user ? req.user.username : "",
       });
     }
   });
 };
 
-module.exports.displayQuestionPage = (req, res, next)=> {
+module.exports.displayQuestionPage = (req, res, next) => {
   let id = req.params.id;
   Survey.findById(id, (err, survey) => {
     if (err) {
@@ -47,9 +46,10 @@ module.exports.displayQuestionPage = (req, res, next)=> {
     } else {
       console.log(survey);
       res.render("survey/question", {
-      title: "Add Question"
+        title: "Add Question",
+        username: req.user ? req.user.username : "",
       });
-    };
+    }
   });
 };
 
@@ -61,7 +61,7 @@ module.exports.processQuestionPage = (req, res, next) => {
     answerOne: req.body.answerOne,
     answerTwo: req.body.answerTwo,
     answerThree: req.body.answerThree,
-    answerFour: req.body.answerFour
+    answerFour: req.body.answerFour,
   });
 
   Question.create(newQuestion, (err, newQuestion) => {
@@ -70,15 +70,15 @@ module.exports.processQuestionPage = (req, res, next) => {
       res.end(err);
     } else {
       console.log(newQuestion);
-      res.redirect("./"+id);
+      res.redirect("./" + id);
     }
-  });  
+  });
 };
-
 
 module.exports.displayAddPage = (req, res, next) => {
   res.render("survey/add", {
     title: "Add Survey",
+    username: req.user ? req.user.username : "",
   });
 };
 
@@ -95,7 +95,7 @@ module.exports.processAddPage = (req, res, next) => {
       res.end(err);
     } else {
       //refresh
-      res.redirect("/home");
+      res.redirect("/survey-list");
     }
   });
 };
@@ -130,6 +130,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
       res.render("survey/update", {
         title: "Update Survey",
         survey: updateSurvey,
+        username: req.user ? req.user.username : "",
       });
     }
   });
@@ -151,7 +152,7 @@ module.exports.processUpdatePage = (req, res, next) => {
       res.end(err);
     } else {
       //refresh survey list
-      res.redirect("/home");
+      res.redirect("/survey-list");
     }
   });
 };
@@ -165,7 +166,7 @@ module.exports.performDelete = (req, res, next) => {
       res.end(err);
     } else {
       //refresh survey list
-      res.redirect("/home");
+      res.redirect("/survey-list");
     }
   });
 };

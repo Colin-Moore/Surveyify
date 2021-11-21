@@ -2,36 +2,44 @@ let express = require("express");
 let router = express.Router();
 let mongoose = require("mongoose");
 
+let passport = require("passport");
+
 let surveyController = require("../controllers/survey");
 
+// helper function for guard purposes
+function requireAuth(req, res, next) {
+  // check if user is logged in
+  if (!req.isAuthenticated()) {
+    return res.redirect("/login");
+  }
+  next();
+}
+
 /* GET route for Survey List page - READ Operation */
-router.get("/", surveyController.displaySurveyList);
+router.get("/", requireAuth, surveyController.displaySurveyList);
 
 /* GET route for displaying ADD page - CREATE Operation */
-router.get("/add", surveyController.displayAddPage);
+router.get("/add", requireAuth, surveyController.displayAddPage);
 
 /* POST route for processing ADD page - CREATE Operation */
-router.post("/add", surveyController.processAddPage);
+router.post("/add", requireAuth, surveyController.processAddPage);
 
-/* POST route for processing SAVE page - CREATE Operation */
-router.post("/save", surveyController.processSavePage);
-
-/* GET route for processing UPDATE page - UPDATE Operation */
-router.get("/update/:id", surveyController.displayUpdatePage);
+/* GET route for displaying UPDATE page - UPDATE Operation */
+router.get("/update/:id", requireAuth, surveyController.displayUpdatePage);
 
 /* POST route for processing UPDATE page - UPDATE Operation */
-router.post("/update/:id", surveyController.processUpdatePage);
+router.post("/update/:id", requireAuth, surveyController.processUpdatePage);
 
 /* GET route to perform deletion - DELETE Operation */
-router.get("/delete/:id", surveyController.performDelete);
+router.get("/delete/:id", requireAuth, surveyController.performDelete);
 
 /* GET route for displaying ADD QUESTION page */
-router.get("/question/:id", surveyController.displayQuestionPage);
+router.get("/question/:id", requireAuth, surveyController.displayQuestionPage);
 
 /* POST route for ADD QUESTION page - CREATE operation */
-router.post("/question/:id", surveyController.processQuestionPage);
+router.post("/question/:id", requireAuth, surveyController.processQuestionPage);
 
 /* GET route for displaying VIEW page - READ */
-router.get("/view/:id", surveyController.showSurvey);
+router.get("/view/:id", requireAuth, surveyController.showSurvey);
 
 module.exports = router;
