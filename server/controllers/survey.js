@@ -7,7 +7,7 @@ let Survey = require("../models/survey");
 let Question = require("../models/question");
 
 module.exports.displaySurveyList = (req, res, next) => {
-  Survey.find((err, surveyList) => {
+  Survey.find({userID: req.user.id}, (err, surveyList) => {
     if (err) {
       return console.error(err);
     } else {
