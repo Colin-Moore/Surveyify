@@ -5,6 +5,7 @@ let surveyModel = mongoose.Schema(
   {
     surveyName: String,
     userID: String,
+    username: String,
     description: String,
     expirationDate: Date, //TODO String type placeholder for now. change to datetime?
   },

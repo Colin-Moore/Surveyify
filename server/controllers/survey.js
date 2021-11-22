@@ -85,7 +85,8 @@ module.exports.displayAddPage = (req, res, next) => {
 module.exports.processAddPage = (req, res, next) => {
   let newSurvey = Survey({
     surveyName: req.body.surveyName,
-    author: req.body.author,
+    userID: req.user._id,
+    username: req.user.username,
     expirationDate: req.body.expirationDate,
   });
 
@@ -170,5 +171,6 @@ module.exports.performDelete = (req, res, next) => {
     }
   });
 };
+
 
 /*Jeffrey Sy 980045498 */
