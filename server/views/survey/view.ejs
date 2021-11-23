@@ -1,18 +1,17 @@
 <%- include ../partials/header.ejs %>
 <%- include ../partials/main-nav.ejs %>
- <h1> Survey Questions </h1>
+<!-- Display list of survey questions -->
+<h1> Survey Questions </h1>
 <main class="container">
   <table class="table table-bordered table-striped table-hover">
         <!-- Header Row-->
         <tr>
-          <th class="text-center">Question</th>
+          <th style="width:9%" class="text-center">Question #</th>
           <th class="text-center">Text</th>          
           <th class="text-center">Edit</th>
           <th class="text-center">Delete</th>           
         </tr>
-
         <!-- Repeatable Template Row-->
-
         <% for(let count = 0; count < QuestionList.length; count++) { %>
           <tr>
             <td class="text-center"><%- count + 1 %></td>
@@ -21,11 +20,7 @@
             <td class="text-center"><a href="/survey-list/deleteQ/<%=QuestionList[count]._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</a></td>
             <% } %>
           </tr>
-          
-
       </table>
-
-
 </main>
 
 <%- include ../partials/bottom-nav.ejs %>
