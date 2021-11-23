@@ -39,7 +39,17 @@ router.get("/question/:id", requireAuth, surveyController.displayQuestionPage);
 /* POST route for ADD QUESTION page - CREATE operation */
 router.post("/question/:id", requireAuth, surveyController.processQuestionPage);
 
+/* GET route to perform deletion for questions - DELETE Operation */
+router.get("/deleteQ/:id", requireAuth, surveyController.deleteQuestion);
+
+/* GET route to edit questions - UPDATE operation */
+router.get("/updateQ/:id", requireAuth, surveyController.displayEditQuestion)
+
+/* POST route for editing questions - UPDATE Operation */
+router.post("/updateQ/:id", requireAuth, surveyController.processEditQuestion);
+
 /* GET route for displaying VIEW page - READ */
 router.get("/view/:id", requireAuth, surveyController.showSurvey);
 
 module.exports = router;
+

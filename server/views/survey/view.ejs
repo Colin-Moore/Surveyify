@@ -1,22 +1,26 @@
 <%- include ../partials/header.ejs %>
 <%- include ../partials/main-nav.ejs %>
- <h1> Survey Questions </h1>
+<!-- Display list of survey questions -->
+<h1> Survey Questions </h1>
 <main class="container">
-  <div class="row">
-    <div class="text-center col-md-2">
-      <!-- NOT PRETTY!  JUST PROOF OF CONCEPT-->
-     
-        <% for(let count=0; count < QuestionList.length; count++) { %>
-          <h3>Question <%= count + 1 %></h3>
-        <input type="text" value="<%= QuestionList[count].surveyQuestion %>"></input>
-        <input type="text" value="<%= QuestionList[count].answerOne %>"></input>
-        <input type="text" value="<%= QuestionList[count].answerTwo %>"></input>
-        <input type="text" value="<%= QuestionList[count].answerThree %>"></input>
-        <input type="text" value="<%= QuestionList[count].answerFour %>"></input>
-      <% } %>
-
-    </div>
-  </div>
+  <table class="table table-bordered table-striped table-hover">
+        <!-- Header Row-->
+        <tr>
+          <th style="width:9%" class="text-center">Question #</th>
+          <th class="text-center">Text</th>          
+          <th class="text-center">Edit</th>
+          <th class="text-center">Delete</th>           
+        </tr>
+        <!-- Repeatable Template Row-->
+        <% for(let count = 0; count < QuestionList.length; count++) { %>
+          <tr>
+            <td class="text-center"><%- count + 1 %></td>
+            <td class="text-center"><%- QuestionList[count].surveyQuestion %></td>                       
+            <td class="text-center"><a href="/survey-list/updateQ/<%=QuestionList[count]._id%>" class="btn btn-warning btn-sm"><i class="fas fa-wrench"></i>Update</a></td>
+            <td class="text-center"><a href="/survey-list/deleteQ/<%=QuestionList[count]._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</a></td>
+            <% } %>
+          </tr>
+      </table>
 </main>
 
 <%- include ../partials/bottom-nav.ejs %>

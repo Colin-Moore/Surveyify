@@ -99,7 +99,7 @@ module.exports.processRegisterPage = (req, res, next) => {
         console.log("ErrorL User Already Exists");
       }
       return res.render("auth/register", {
-        title: "Regsiter",
+        title: "Register",
         messages: req.flash("registerMessage"),
         username: req.user ? req.user.username : "",
       });
