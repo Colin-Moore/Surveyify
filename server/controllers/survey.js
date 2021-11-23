@@ -21,9 +21,12 @@ module.exports.displaySurveyList = (req, res, next) => {
   });
 };
 
+
+// Displays list of questions in a survey 
 module.exports.showSurvey = (req, res, next) => {
   let id = req.params.id;
-  Question.find({ surveyId: id }, (err, questionList) => {
+
+  Question.find({ surveyID: id }, (err, questionList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -31,12 +34,18 @@ module.exports.showSurvey = (req, res, next) => {
       res.render("survey/view", {
         title: "Surveys",
         QuestionList: questionList,
+        surveyID: id,           
         username: req.user ? req.user.username : "",
+
       });
     }
   });
 };
 
+
+// ****************
+// Question section
+// ****************
 module.exports.displayQuestionPage = (req, res, next) => {
   let id = req.params.id;
   Survey.findById(id, (err, survey) => {
@@ -45,9 +54,9 @@ module.exports.displayQuestionPage = (req, res, next) => {
       res.end(err);
     } else {
       console.log(survey);
-      res.render("survey/question", {
+      res.render("survey/addquestion", {
         title: "Add Question",
-        username: req.user ? req.user.username : "",
+        username: req.user ? req.user.username : "",        
       });
     }
   });
@@ -56,12 +65,9 @@ module.exports.displayQuestionPage = (req, res, next) => {
 module.exports.processQuestionPage = (req, res, next) => {
   id = req.params.id;
   let newQuestion = new Question({
-    surveyId: id,
+    surveyID: id,
     surveyQuestion: req.body.surveyQuestion,
-    answerOne: req.body.answerOne,
-    answerTwo: req.body.answerTwo,
-    answerThree: req.body.answerThree,
-    answerFour: req.body.answerFour,
+    description: req.body.description
   });
 
   Question.create(newQuestion, (err, newQuestion) => {
@@ -74,6 +80,41 @@ module.exports.processQuestionPage = (req, res, next) => {
     }
   });
 };
+
+// edit question function
+module.exports.editQuestion = (req, res, next) => {
+  let id = req.params.id;
+  let updatedQuestion = Question({
+    "_id": id,
+    "surveyID": surveyID,
+    "surveyQuestion": req.body.surveyQuestion
+  });
+
+  Question.updateOne({_id: id}, updatedQuestion, (err) => {
+    if (err) {
+      res.end(err);
+    } else{
+      res.redirect('/');
+    }
+  });
+}
+
+// Delete question function
+module.exports.deleteQuestion = (req, res, next) => {
+  let id = req.params.id;
+  Question.remove({_id: id}, (err) => {
+    if (err) {
+      res.end(err);
+    } else {
+      res.redirect("/");
+    }
+  });
+}
+// 
+// END QUESTION SECTION
+//
+
+
 
 module.exports.displayAddPage = (req, res, next) => {
   res.render("survey/add", {
