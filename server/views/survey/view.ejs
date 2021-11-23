@@ -10,7 +10,7 @@
           <% for(let count=0; count < QuestionList.length; count++) { %>
             <h3>Question <%= count + 1 %></h3>
           <input type="text" name="surveyQuestion" value="<%= QuestionList[count].surveyQuestion %>"></input>
-          <a href="/survey-list/updateQ/<%=QuestionList[count]._id%>" class="btn btn-warning">Update</a>          
+          <a href="/survey-list/updateQ/<%=QuestionList[count]._id%>" class="btn btn-warning btn-sm">Update</a>          
           <a href="/survey-list/deleteQ/<%=QuestionList[count]._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</a>
           <% } %>
         </div>

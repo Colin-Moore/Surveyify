@@ -81,19 +81,36 @@ module.exports.processQuestionPage = (req, res, next) => {
   });
 };
 
-// edit question function
-module.exports.editQuestion = (req, res, next) => {
+// display edit question page
+module.exports.displayEditQuestion = (req, res, next) => {
   let id = req.params.id;
+  Question.findById(id, (err, questiontoUpdate) =>{
+    if(err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.render("survey/addquestion", {
+        title: "Edit Question",
+        question: questiontoUpdate,
+        username: req.user ? req.user.username: "",        
+      });
+    };
+  });
+};
+
+// Edit question function
+module.exports.processEditQuestion = (req, res, next) => {
+  let id = req.params.id;  
   let updatedQuestion = Question({
     "_id": id,
-    "surveyID": surveyID,
+    "surveyID": req.body.surveyID,
     "surveyQuestion": req.body.surveyQuestion
   });
 
   Question.updateOne({_id: id}, updatedQuestion, (err) => {
     if (err) {
       res.end(err);
-    } else{
+    } else {
       res.redirect('/');
     }
   });
