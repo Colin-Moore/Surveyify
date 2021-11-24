@@ -5,6 +5,7 @@ let mongoose = require("mongoose");
 //Create reference to model
 let Survey = require("../models/survey");
 let Question = require("../models/question");
+const question = require("../models/question");
 
 module.exports.displaySurveyList = (req, res, next) => {
   Survey.find({userID: req.user.id}, (err, surveyList) => {
@@ -49,6 +50,11 @@ module.exports.showSurvey = (req, res, next) => {
 module.exports.displayQuestionPage = (req, res, next) => {
   let id = req.params.id;
   Survey.findById(id, (err, survey) => {
+    let newQuestion = new Question({
+      surveyID: id,
+      surveyQuestion: req.body.surveyQuestion,
+      description: req.body.description
+    });
     if (err) {
       console.log(err);
       res.end(err);
@@ -56,6 +62,7 @@ module.exports.displayQuestionPage = (req, res, next) => {
       console.log(survey);
       res.render("survey/addquestion", {
         title: "Add Question",
+        question: newQuestion,
         username: req.user ? req.user.username : "",        
       });
     }
@@ -76,7 +83,7 @@ module.exports.processQuestionPage = (req, res, next) => {
       res.end(err);
     } else {
       console.log(newQuestion);
-      res.redirect("./" + id);
+      res.redirect("back");
     }
   });
 };
@@ -101,6 +108,7 @@ module.exports.displayEditQuestion = (req, res, next) => {
 // Edit question function
 module.exports.processEditQuestion = (req, res, next) => {
   let id = req.params.id;  
+  
   let updatedQuestion = Question({
     "_id": id,
     "surveyID": req.body.surveyID,
@@ -111,7 +119,7 @@ module.exports.processEditQuestion = (req, res, next) => {
     if (err) {
       res.end(err);
     } else {
-      res.redirect('/');
+      res.redirect("back");
     }
   });
 }
@@ -119,12 +127,14 @@ module.exports.processEditQuestion = (req, res, next) => {
 // Delete question function
 module.exports.deleteQuestion = (req, res, next) => {
   let id = req.params.id;
+
   Question.remove({_id: id}, (err) => {
     if (err) {
       res.end(err);
     } else {
-      res.redirect("/");
-    }
+      res.redirect("back");
+      };
+    
   });
 }
 // 
