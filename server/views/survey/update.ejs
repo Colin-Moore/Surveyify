@@ -30,24 +30,27 @@
                     <br>
                     <hr style="height:5px">                   
                     <a href="/survey-list/question/<%=survey._id%>" class="btn btn-secondary btn-sm">Add Questions</a>
-                    <a href="../../survey-list/view/<%=survey._id%>" class="btn btn-primary btn-sm">Edit Questions</a>
                 </form>
             </div>
         </div>
     </div>
     <h1 style="text-align: center; padding-bottom: 20px;"> Questions</h1>
 
-    <table class="table table-bordered table-striped table-hover" style="width: 40%; margin-left: auto; margin-right: auto;">
+    <table class="table table-bordered table-striped table-hover" style="margin-left: auto; margin-right: auto; width: 50%;">
         <!-- Header Row-->
         <tr>
           <th style="width:9%" class="text-center">Question #</th>
-          <th class="text-center">Text</th>                 
+          <th class="text-center">Text</th>          
+          <th class="text-center">Edit</th>
+          <th class="text-center">Delete</th>           
         </tr>
         <!-- Repeatable Template Row-->
         <% for(let count = 0; count < QuestionList.length; count++) { %>
           <tr>
             <td class="text-center"><%- count + 1 %></td>
             <td class="text-center"><%- QuestionList[count].surveyQuestion %></td>                       
+            <td class="text-center"><a href="/survey-list/updateQ/<%=QuestionList[count]._id%>" class="btn btn-warning btn-sm"><i class="fas fa-wrench"></i>Update</a></td>
+            <td class="text-center"><a href="/survey-list/deleteQ/<%=QuestionList[count]._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</a></td>
             <% } %>
           </tr>
       </table>
