@@ -8,7 +8,7 @@ let Question = require("../models/question");
 const question = require("../models/question");
 
 module.exports.displaySurveyList = (req, res, next) => {
-  Survey.find({userID: req.user.id}, (err, surveyList) => {
+  Survey.find({ userID: req.user.id }, (err, surveyList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -22,11 +22,9 @@ module.exports.displaySurveyList = (req, res, next) => {
   });
 };
 
-
-// Displays list of questions in a survey 
+// Displays list of questions in a survey
 module.exports.showSurvey = (req, res, next) => {
   let id = req.params.id;
-
   Question.find({ surveyID: id }, (err, questionList) => {
     if (err) {
       return console.error(err);
@@ -35,14 +33,12 @@ module.exports.showSurvey = (req, res, next) => {
       res.render("survey/view", {
         title: "Surveys",
         QuestionList: questionList,
-        surveyID: id,           
+        surveyID: id,
         username: req.user ? req.user.username : "",
-
       });
     }
   });
 };
-
 
 // ****************
 // Question section
@@ -53,7 +49,7 @@ module.exports.displayQuestionPage = (req, res, next) => {
     let newQuestion = new Question({
       surveyID: id,
       surveyQuestion: req.body.surveyQuestion,
-      description: req.body.description
+      description: req.body.description,
     });
     if (err) {
       console.log(err);
@@ -63,7 +59,7 @@ module.exports.displayQuestionPage = (req, res, next) => {
       res.render("survey/addquestion", {
         title: "Add Question",
         question: newQuestion,
-        username: req.user ? req.user.username : "",        
+        username: req.user ? req.user.username : "",
       });
     }
   });
@@ -74,7 +70,7 @@ module.exports.processQuestionPage = (req, res, next) => {
   let newQuestion = new Question({
     surveyID: id,
     surveyQuestion: req.body.surveyQuestion,
-    description: req.body.description
+    description: req.body.description,
   });
 
   Question.create(newQuestion, (err, newQuestion) => {
@@ -83,7 +79,7 @@ module.exports.processQuestionPage = (req, res, next) => {
       res.end(err);
     } else {
       console.log(newQuestion);
-      res.redirect("back");
+      res.redirect("/survey-list/update/" + req.params.id);
     }
   });
 };
@@ -91,57 +87,55 @@ module.exports.processQuestionPage = (req, res, next) => {
 // display edit question page
 module.exports.displayEditQuestion = (req, res, next) => {
   let id = req.params.id;
-  Question.findById(id, (err, questiontoUpdate) =>{
-    if(err) {
+  Question.findById(id, (err, questiontoUpdate) => {
+    if (err) {
       console.log(err);
       res.end(err);
     } else {
       res.render("survey/addquestion", {
         title: "Edit Question",
         question: questiontoUpdate,
-        username: req.user ? req.user.username: "",        
+        username: req.user ? req.user.username : "",
       });
-    };
+    }
   });
 };
 
 // Edit question function
 module.exports.processEditQuestion = (req, res, next) => {
-  let id = req.params.id;  
-  
+  let id = req.params.id;
+
   let updatedQuestion = Question({
-    "_id": id,
-    "surveyID": req.body.surveyID,
-    "surveyQuestion": req.body.surveyQuestion
+    _id: id,
+    surveyID: req.body.surveyID,
+    surveyQuestion: req.body.surveyQuestion,
   });
 
-  Question.updateOne({_id: id}, updatedQuestion, (err) => {
+  Question.updateOne({ _id: id }, updatedQuestion, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.redirect("back");
+    }
+  });
+};
+
+// Delete question function
+module.exports.deleteQuestion = (req, res, next) => {
+  let id = req.params.id;
+
+  Question.remove({ _id: id }, (err) => {
     if (err) {
       res.end(err);
     } else {
       res.redirect("back");
     }
   });
-}
-
-// Delete question function
-module.exports.deleteQuestion = (req, res, next) => {
-  let id = req.params.id;
-
-  Question.remove({_id: id}, (err) => {
-    if (err) {
-      res.end(err);
-    } else {
-      res.redirect("back");
-      };
-    
-  });
-}
-// 
+};
+//
 // END QUESTION SECTION
 //
-
-
 
 module.exports.displayAddPage = (req, res, next) => {
   res.render("survey/add", {
@@ -196,20 +190,19 @@ module.exports.displayUpdatePage = (req, res, next) => {
       res.end(err);
     } else {
       Question.find({ surveyID: id }, (err, questionList) => {
-    if (err) {
-      return console.error(err);
-    }
-    else{
-      //show update view
-      res.render("survey/update", {
-        title: "Update Survey",
-        survey: updateSurvey,
-        QuestionList: questionList,
-        username: req.user ? req.user.username : "",
+        if (err) {
+          return console.error(err);
+        } else {
+          //show update view
+          res.render("survey/update", {
+            title: "Update Survey",
+            survey: updateSurvey,
+            QuestionList: questionList,
+            username: req.user ? req.user.username : "",
+          });
+        }
       });
     }
-  });
-};
   });
 };
 
@@ -247,6 +240,5 @@ module.exports.performDelete = (req, res, next) => {
     }
   });
 };
-
 
 /*Jeffrey Sy 980045498 */
