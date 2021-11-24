@@ -14,13 +14,13 @@
                             <div class="form-group">
                                 <label for="nameTextField">Survey Name</label>
                                 <input type="text" class="form-control" id="nameTextField"
-                                    placeholder="Enter Survey Name" name="surveyName" required>
+                                    placeholder="Enter Survey Name" name="surveyName" required pattern=".*\S+.*" title="field cannot be blank">
                             </div>
                         
                             <div class="form-group">
                                 <label for="dateTextField">Expiration Date</label>
-                                <input type="text" class="form-control" id="dateTextField"
-                                    placeholder="Enter Expiration Date" name="expirationDate" required>
+                                <input placeholder="Enter Expiration Date" class="textbox-n form-control" type="text" onfocus="(this.type='date')"
+                                    onblur="(this.type='text')" id="dateTextField" name="expirationDate" required />
                             </div>
                             <br>
 

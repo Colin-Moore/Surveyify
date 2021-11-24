@@ -12,24 +12,19 @@
                     <div class="form-group">
                         <label for="nameTextField">Survey Name</label>
                         <input type="text" class="form-control" id="nameTextField" placeholder="Enter Survey Name"
-                            name="surveyName" value="<%=survey.surveyName%>"required>
-                    </div>
-                    <div class="form-group">
-                        <label for="authorTextField">Author Number</label>
-                        <input type="text" class="form-control" id="numberTextField" placeholder="Enter Author"
-                            name="author" value="<%=survey.author%>" required>
+                            name="surveyName" value="<%=survey.surveyName%>"required pattern=".*\S+.*" title="field cannot be blank">
                     </div>
                     <div class="form-group">
                         <label for="dateTextField">Expiration Date</label>
-                        <input type="text" class="form-control" id="dateTextField" placeholder="Enter Expiration Date"
-                            name="expirationDate" value="<%=survey.expirationDate%>" required>
+                        <input placeholder="Enter Expiration Date" class="textbox-n form-control" type="text" onfocus="(this.type='date')"
+                            onblur="(this.type='text')" id="dateTextField" name="expirationDate" value="<%=survey.expirationDate%>" required />
                     </div>
                     
                     <button class="btn btn-primary btn-sm" type="submit">
                         <i class="fas fa-save"></i> Submit
                     </button>
                     <a href="/survey-list/delete/<%=survey._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</a>
-                    <a href="/home" class="btn btn-warning btn-sm"><i class="fas fa-undo"></i> Cancel</a>
+                    <a href="/survey-list" class="btn btn-warning btn-sm"><i class="fas fa-undo"></i> Cancel</a>
                     <br>
                     <br>
                     <br>
