@@ -185,13 +185,21 @@ module.exports.displayUpdatePage = (req, res, next) => {
       console.log(err);
       res.end(err);
     } else {
+      Question.find({ surveyID: id }, (err, questionList) => {
+    if (err) {
+      return console.error(err);
+    }
+    else{
       //show update view
       res.render("survey/update", {
         title: "Update Survey",
         survey: updateSurvey,
+        QuestionList: questionList,
         username: req.user ? req.user.username : "",
       });
     }
+  });
+};
   });
 };
 
