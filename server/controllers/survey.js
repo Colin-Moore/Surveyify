@@ -109,17 +109,25 @@ module.exports.processEditQuestion = (req, res, next) => {
     _id: id,
     surveyID: req.body.surveyID,
     surveyQuestion: req.body.surveyQuestion,
-  });
+  }); 
 
   Question.updateOne({ _id: id }, updatedQuestion, (err) => {
     if (err) {
       console.log(err);
       res.end(err);
-    } else {
-      res.redirect("back");
-    }
+      } 
+      else 
+      {
+        Question.findById(id, (err, question) => {
+          let returnSurvey = question.surveyID;
+          res.redirect("/survey-list/update/" + returnSurvey);
+        });
+      }
   });
-};
+};      
+
+
+
 
 // Delete question function
 module.exports.deleteQuestion = (req, res, next) => {
