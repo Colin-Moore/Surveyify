@@ -19,7 +19,9 @@
                         <input placeholder="Enter Expiration Date" class="textbox-n form-control" type="text" onfocus="(this.type='date')"
                             onblur="(this.type='text')" id="dateTextField" name="expirationDate" value="<%=survey.expirationDate%>" required />
                     </div>
-                    
+                    <% if(survey.isPublished != true) { %>
+                    <a href="/survey-list/publishSaved/<%=survey._id%>" class="btn btn-secondary btn-sm">Publish</a>
+                    <% } %>
                     <button class="btn btn-primary btn-sm" type="submit">
                         <i class="fas fa-save"></i> Submit
                     </button>
