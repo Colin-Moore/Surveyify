@@ -27,6 +27,9 @@ router.post("/add", requireAuth, surveyController.processAddPage);
 /* POST route for processing SAVE page - CREATE Operation */
 router.post("/save", requireAuth, surveyController.processSavePage)
 
+/* GET route to publish previously saved survey */
+router.get("/publishSaved/:id", requireAuth, surveyController.publishSavedSurvey);
+
 /* GET route for displaying UPDATE page - UPDATE Operation */
 router.get("/update/:id", requireAuth, surveyController.displayUpdatePage);
 

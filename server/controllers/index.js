@@ -11,7 +11,7 @@ let userModel = require("../models/user");
 let User = userModel.User;
 
 module.exports.displayHomePage = (req, res, next) => {
-  Survey.find((err, surveyList) => {
+  Survey.find({isPublished: "true"}, (err, surveyList) => {
     if (err) {
       return console.error(err);
     } else {
