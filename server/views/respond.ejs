@@ -1,0 +1,46 @@
+<%- include partials/header.ejs %>
+
+  <%- include partials/main-nav.ejs %>
+  
+  <main class="container">
+    <div class="row mt-5">
+      <div class="text-center col-md-12 mt-5">
+        <h1>
+          <%- title %>
+        </h1>
+        <hr style="height:2px; color: black;">
+        <br>
+        <h2>Question:</h2>
+        <br>
+        <h3>Question that we have for the survey?</h3>
+
+        <br>
+
+        <div class="btn-group-vertical">
+            <input type="radio" class="btn-check"  name="options"  id="option1" autocomplete="off"/>
+            <label class="btn btn-outline-secondary" for="question1" >Question 1</label>
+            <br>
+            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
+            <label class="btn btn-outline-secondary" for="question2">Question 2</label>
+          
+            <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" />
+            <label class="btn btn-outline-secondary" for="question3">Question 3</label>
+            
+            <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" />
+            <label class="btn btn-outline-secondary" for="question4">Question 4</label>
+          </div>
+
+      </div>
+
+      <hr style="height:2px; color: black; margin-top: 40px; margin-bottom: 40px;">
+
+      
+    </div>
+    <div class="col text-center">
+        <a href="" class="btn btn-primary" id="test">Next</a>
+      </div>
+  </main>
+
+  <%- include partials/bottom-nav.ejs %>
+
+  <%- include partials/footer %>

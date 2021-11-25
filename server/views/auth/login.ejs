@@ -1,11 +1,16 @@
-<%- include partials/header.ejs %>
+<%- include ../partials/header.ejs %>
 
-<%- include partials/main-nav.ejs %>
+<%- include ../partials/main-nav.ejs %>
 
 <main class="container center">
+  <!-- Message Area-->
+  <%if(messages.length> 0) {%>
+    <div class="alert alert-danger">
+      <%=messages %>
+    </div>
+    <%}%>
 
   <div class="card" style="width: 16rem; height: 20rem;">
-
       <h1 class="title"><%- title %></h1>
       <form  class="justify-content-center" method="POST" autocomplete="off">
         <fieldset class="form-group">
@@ -19,22 +24,22 @@
           name="password" placeholder="Password"
           id="password" required autofocus>
       </fieldset>
-    <br>
-            <a class="registration" href="/register">Register Here</a>
-
-    <br>
-    <div class="col-md-12 text-center">
-        <a class="btn btn-outline-primary text-center" href="#" type="submit" value="Login">Login</a>
-        <a class="btn btn-outline-danger" href="#" type="submit" value="Login">Cancel</a>
-    </div>
+      <br>
+      <a class="registration" href="/register">Register Here</a>
       <br>
       <br>
+      <fieldset class="form-group text-center">
+        <input type="submit" class="btn btn-outline-primary" value="Login">
+        <a href="/">
+          <input type="button" class="btn btn-outline-danger" value="Cancel">
+        </a>
+      </fieldset>
     </form>
 
     </div>
 
 </main>
 
-<%- include partials/bottom-nav.ejs %> 
+<%- include ../partials/bottom-nav.ejs %> 
 
-<%- include partials/footer %>
+<%- include ../partials/footer %>
