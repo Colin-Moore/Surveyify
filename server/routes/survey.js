@@ -38,6 +38,12 @@ router.get("/question/:id", requireAuth, surveyController.displayQuestionPage);
 
 /* POST route for ADD QUESTION page - CREATE operation */
 router.post("/question/:id", requireAuth, surveyController.processQuestionPage);
+/* GET route for displaying ADD QUESTION page */
+
+router.get("/MCquestion/:id", requireAuth, surveyController.displayMCQuestionPage);
+
+/* POST route for ADD QUESTION page - CREATE operation */
+router.post("/MCquestion/:id", requireAuth, surveyController.processMCQuestionPage);
 
 /* GET route to perform deletion for questions - DELETE Operation */
 router.get("/deleteQ/:id", requireAuth, surveyController.deleteQuestion);
