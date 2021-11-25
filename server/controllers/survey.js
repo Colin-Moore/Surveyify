@@ -1,3 +1,4 @@
+
 let express = require("express");
 let router = express.Router();
 let mongoose = require("mongoose");
@@ -5,7 +6,7 @@ let mongoose = require("mongoose");
 //Create reference to model
 let Survey = require("../models/survey");
 let Question = require("../models/question");
-let Answer = require("../models/answer");
+let Answwer = require("../models/answer");
 let Option = require("../models/option");
 
 
@@ -73,7 +74,6 @@ module.exports.processQuestionPage = (req, res, next) => {
     surveyID: id,
     surveyQuestion: req.body.surveyQuestion,
     description: req.body.description,
-    multipleChoice: false
   });
 
   Question.create(newQuestion, (err, newQuestion) => {
@@ -86,32 +86,27 @@ module.exports.processQuestionPage = (req, res, next) => {
     }
   });
 };
-//display multiple choice page
+
+
+//FIX THIS!!!!
+
 module.exports.displayMCQuestionPage = (req, res, next) => {
   let id = req.params.id;
-
   Survey.findById(id, (err, survey) => {
     let newQuestion = new Question({
       surveyID: id,
       surveyQuestion: req.body.surveyQuestion,
       description: req.body.description,
     });
-    let newOption = new Option({
-    })
-    if (err) {
-      console.log(err);
-      res.end(err);
-    } else {
-      console.log(survey);
-      res.render("survey/addMCquestion", {
-        title: "Add Question",
-        question: newQuestion,
-        OptionList: newOption,
-        username: req.user ? req.user.username : "",
-      });
-    }
+    res.render("survey/addMCquestion", {
+      title: "Add Question",
+      question: newQuestion,
+      OptionList: "Empty",
+      username: req.user ? req.user.username : "",
   });
+});
 };
+
 //process multiple choice page
 module.exports.processMCQuestionPage = (req, res, next) => {
   id = req.params.id;
@@ -146,7 +141,7 @@ module.exports.processMCQuestionPage = (req, res, next) => {
         });
         x++;
       });
-      res.redirect("back");
+      res.redirect("/survey-list/update/" + req.params.id);
     }
   });
 }; 
@@ -314,12 +309,10 @@ module.exports.processAddPage = (req, res, next) => {
     }
   });
 };
-
 module.exports.processSavePage = (req, res, next) => {
   let newSurvey = Survey({
     surveyName: req.body.surveyName,
-    userID: req.user._id,
-    username: req.user.username,
+    author: req.body.author,
     expirationDate: req.body.expirationDate,
   });
 
