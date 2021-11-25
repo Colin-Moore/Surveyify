@@ -318,7 +318,8 @@ module.exports.processAddPage = (req, res, next) => {
 module.exports.processSavePage = (req, res, next) => {
   let newSurvey = Survey({
     surveyName: req.body.surveyName,
-    author: req.body.author,
+    userID: req.user._id,
+    username: req.user.username,
     expirationDate: req.body.expirationDate,
   });
 

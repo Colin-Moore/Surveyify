@@ -24,6 +24,9 @@ router.get("/add", requireAuth, surveyController.displayAddPage);
 /* POST route for processing ADD page - CREATE Operation */
 router.post("/add", requireAuth, surveyController.processAddPage);
 
+/* POST route for processing SAVE page - CREATE Operation */
+router.post("/save", requireAuth, surveyController.processSavePage)
+
 /* GET route for displaying UPDATE page - UPDATE Operation */
 router.get("/update/:id", requireAuth, surveyController.displayUpdatePage);
 
