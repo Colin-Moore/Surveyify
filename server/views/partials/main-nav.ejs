@@ -17,7 +17,7 @@
     <div class="d-flex">
       <% if(typeof username == 'string' && username) { %>
         <p style="margin-top: auto; margin-bottom: auto;">Welcome, <%=username%></p>
-        <a class="nav-link text-dark" href="survey-list" id="navMySurvey">My Surveys</a>
+        <a class="nav-link text-dark" href="/survey-list" id="navMySurvey">My Surveys</a>
         <a class="nav-link text-secondary text-dark" href="/logout">Logout</a>
       <% } else { %> 
         <a class="nav-link text-secondary text-dark" href="/login">Login</a>

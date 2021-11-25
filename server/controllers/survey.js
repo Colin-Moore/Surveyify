@@ -87,9 +87,6 @@ module.exports.processQuestionPage = (req, res, next) => {
   });
 };
 
-
-//FIX THIS!!!!
-
 module.exports.displayMCQuestionPage = (req, res, next) => {
   let id = req.params.id;
   Survey.findById(id, (err, survey) => {
