@@ -10,15 +10,15 @@
       <table class="table table-bordered table-striped table-hover mt-5" style="background-color: #91A5B5; border-radius: 20px;">
         <tr class="d-flex">
           <th class="text-center col-2">Title</th>
-          <th class="text-center col-3">Expires</th>
+          <th class="text-center col-2">Expires</th>
           <th class="text-center col-6">Operations</th>
-          <th class="text-center col-1">Published</th>
+          <th class="text-center col-2">Published</th>
         </tr>
 
         <% for(let count=0; count < SurveyList.length; count++) { %>
           <tr class="d-flex">
             <td class="text-center col-2"><%= SurveyList[count].surveyName %></td>
-            <td class="text-center col-3"><%= SurveyList[count].expirationDate %></td>
+            <td class="text-center col-2"><%= SurveyList[count].expirationDate %></td>
 
             <td class="text-center col-2">
               <a href="survey-list/update/<%=SurveyList[count]._id%>" class="btn btn-warning">Update</a>
@@ -29,7 +29,7 @@
             <td class="text-center col-2">
               <a href="survey-list/view/<%=SurveyList[count]._id%>" class="btn btn-primary">View</a>
             </td>
-            <td class="text-center col-1"><%= SurveyList[count].isPublished %></td>
+            <td class="text-center col-2"><%= SurveyList[count].isPublished %></td>
 
           </tr>
         <% } %>
