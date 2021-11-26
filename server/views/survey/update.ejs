@@ -20,7 +20,7 @@
                             onblur="(this.type='text')" id="dateTextField" name="expirationDate" value="<%=survey.expirationDate%>" required />
                     </div>
                     <br>
-                    <button class="btn btn-primary btn-sm" formaction='/survey-list/save'>
+                    <button class="btn btn-primary btn-sm" formaction='/survey-list/update/<%=survey._id%>'>
                         <i class="fas fa-save"></i> Save
                     </button>
                     <a href="/survey-list/delete/<%=survey._id%>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</a>
@@ -28,11 +28,13 @@
                     <br> 
                     <br>
                     <% if(survey.isPublished != true) { %>
+
                         <button class="btn btn-warning" formaction="/survey-list/publishSaved/<%=survey._id%>">
                             Publish
                         </button>
+                         <br>
                         <% } %>
-                    <br>
+                   
                     <br>
                     <hr style="height:5px">                   
                     <a href="/survey-list/question/<%=survey._id%>" class="btn btn-secondary btn-sm">Add Fill in Blank Question</a>
