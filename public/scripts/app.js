@@ -23,8 +23,10 @@
   const navMySurveyList = document.getElementById("navMySurvey");
   const navs = [navHome, navAbout, navContact, navMySurveyList];
   navs.forEach((n) => { n.classList.remove("fw-bold"); });
-  if (/^\/home|^\/survey-list/.test(pathname)) {
+  if (pathname.includes("/home") || pathname === "/") {
     navHome.classList.add("fw-bold");
+  } else if (pathname.includes("/survey-list")) {
+    navMySurveyList.classList.add("fw-bold");
   } else if (pathname.includes("/about")) {
     navAbout.classList.add("fw-bold");
   } else if (pathname.includes("/contact")) {
