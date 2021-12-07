@@ -28,7 +28,7 @@ router.post("/register", indexController.processRegisterPage);
 /* GET Route to perform Logout */
 router.get("/logout", indexController.performLogout);
 
-/* GET Respond page */
+/* GET Route Respond */
 router.get("/respond", indexController.displayRespondPage);
 
 module.exports = router;

@@ -294,6 +294,7 @@ module.exports.processAddPage = (req, res, next) => {
     userID: req.user._id,
     username: req.user.username,
     expirationDate: req.body.expirationDate,
+    isPublished: true,
   });
 
   Survey.create(newSurvey, (err, Survey) => {
@@ -306,20 +307,23 @@ module.exports.processAddPage = (req, res, next) => {
     }
   });
 };
+
 module.exports.processSavePage = (req, res, next) => {
   let newSurvey = Survey({
     surveyName: req.body.surveyName,
-    author: req.body.author,
+    userID: req.user._id,
+    username: req.user.username,
     expirationDate: req.body.expirationDate,
+    isPublished: false,
   });
 
-  Survey.create(newSurvey, (err, Survey) => {
+  Survey.create(newSurvey, (err, newSurvey) => {
     if (err) {
       console.log(err);
       res.end(err);
     } else {
       //refresh
-      res.redirect("/survey-list/update/" + Survey._id);
+      res.redirect("/survey-list");
     }
   });
 };
@@ -349,13 +353,38 @@ module.exports.displayUpdatePage = (req, res, next) => {
   });
 };
 
+// Publish a survey that has been saved and not published
+module.exports.publishSavedSurvey = (req,res,next) => {
+  let id = req.params.id;
+
+  let updatedSurvey = Survey({
+    _id: id,
+    surveyName: req.body.surveyName,
+    userID: req.user.userID,
+    userName: req.user.userName,
+    expirationDate: req.body.expirationDate,
+    isPublished: true,
+  });
+
+  Survey.updateOne({ _id: id }, updatedSurvey, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refresh survey list
+      res.redirect("/survey-list");
+    }
+  });
+};
+
 module.exports.processUpdatePage = (req, res, next) => {
   let id = req.params.id;
 
   let updatedSurvey = Survey({
     _id: id,
     surveyName: req.body.surveyName,
-    author: req.body.author,
+    userID: req.user.userID,
+    userName: req.user.userName,
     expirationDate: req.body.expirationDate,
   });
 

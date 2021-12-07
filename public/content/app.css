@@ -42,11 +42,46 @@ body {
   display: block;
 }
 .registration {
-  padding-left: 50px;
   color:black; 
-  text-decoration: none;
 }
 
 .col-md-12{
   margin-top: 20px;
+}
+
+h2{
+
+  text-align: center;
+  margin-bottom: 30px;
+}
+h5{
+  text-align: center;
+  margin-bottom: 50px;
+}
+#contact_page{
+display: flex;
+justify-content: center;
+margin-top: 70px;
+}
+#form_contact_page{
+  margin:50px;
+  padding: 20px;
+}
+#contact_label{
+  padding: 3.5px;
+}
+#contact_img{
+  display: flex;
+  justify-content: center;
+}
+
+#contact_title{
+  font-size: 50px;
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+
+#contact_position{
+  display: flex;
+justify-content: center;
 }

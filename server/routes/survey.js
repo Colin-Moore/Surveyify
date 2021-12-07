@@ -25,7 +25,14 @@ router.get("/add", requireAuth, surveyController.displayAddPage);
 router.post("/add", requireAuth, surveyController.processAddPage);
 
 /* POST route for processing SAVE page - CREATE Operation */
-router.post("/save", requireAuth, surveyController.processSavePage)
+router.post("/save", requireAuth, surveyController.processSavePage);
+
+/* GET route to publish previously saved survey */
+router.post(
+  "/publishSaved/:id",
+  requireAuth,
+  surveyController.publishSavedSurvey
+);
 
 /* GET route for displaying UPDATE page - UPDATE Operation */
 router.get("/update/:id", requireAuth, surveyController.displayUpdatePage);
@@ -43,10 +50,18 @@ router.get("/question/:id", requireAuth, surveyController.displayQuestionPage);
 router.post("/question/:id", requireAuth, surveyController.processQuestionPage);
 /* GET route for displaying ADD QUESTION page */
 
-router.get("/MCquestion/:id", requireAuth, surveyController.displayMCQuestionPage);
+router.get(
+  "/MCquestion/:id",
+  requireAuth,
+  surveyController.displayMCQuestionPage
+);
 
 /* POST route for ADD QUESTION page - CREATE operation */
-router.post("/MCquestion/:id", requireAuth, surveyController.processMCQuestionPage);
+router.post(
+  "/MCquestion/:id",
+  requireAuth,
+  surveyController.processMCQuestionPage
+);
 
 /* GET route to perform deletion for questions - DELETE Operation */
 router.get("/deleteQ/:id", requireAuth, surveyController.deleteQuestion);

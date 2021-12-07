@@ -11,7 +11,7 @@ let userModel = require("../models/user");
 let User = userModel.User;
 
 module.exports.displayHomePage = (req, res, next) => {
-  Survey.find((err, surveyList) => {
+  Survey.find({isPublished: "true"}, (err, surveyList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -34,7 +34,14 @@ module.exports.displayAboutPage = (req, res, next) => {
 
 module.exports.displayContactPage = (req, res, next) => {
   res.render("contact", {
-    title: "Contact",
+    title: "Contact Us",
+    username: req.user ? req.user.username : "",
+  });
+};
+
+module.exports.displayRespondPage = (req, res, next) => {
+  res.render("respond", {
+    title: "Respond",
     username: req.user ? req.user.username : "",
   });
 };
@@ -49,13 +56,6 @@ module.exports.displayLoginPage = (req, res, next) => {
   } else {
     return res.redirect("/");
   }
-};
-
-module.exports.displayRespondPage = (req, res, next) => {
-  res.render("respond", {
-    title: "Respond",
-    username: req.user ? req.user.username : "",
-  });
 };
 
 module.exports.processLoginPage = (req, res, next) => {

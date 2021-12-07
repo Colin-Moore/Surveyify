@@ -19,7 +19,7 @@
                         
                             <div class="form-group">
                                 <label for="dateTextField">Expiration Date</label>
-                                <input placeholder="Enter Expiration Date" class="textbox-n form-control" type="text" onfocus="(this.type='date')"
+                                <input placeholder="Enter Expiration Date" class="textbox-n form-control" max="2100-12-31" type="date" onfocus="(this.type='date')"
                                     onblur="(this.type='text')" id="dateTextField" name="expirationDate" required />
                             </div>
                             <br>
@@ -27,7 +27,7 @@
                             <button class="btn btn-primary" formaction='/survey-list/save'>
                                 <i class="fas fa-save"></i> Save
                             </button>
-                            <a href="/home" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</a>
+                            <a href="/survey-list" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</a>
                             <button class="btn btn-warning" type="submit" formaction='/survey-list/add'>
                                 <i class="fas fa-edit"></i> Publish
                             </button>
@@ -35,7 +35,6 @@
                             <br>
                             <br>
                             <hr style="height:5px">
-                            <p>After saving or publishing, go to Update to add questions!</p>
                         </form>
                     </div>
                 </div>
