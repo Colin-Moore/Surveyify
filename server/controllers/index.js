@@ -23,7 +23,7 @@ module.exports.displayHomePage = (req, res, next) => {
         username: req.user ? req.user.username : "",
       });
     }
-  });
+  }).sort({'expirationDate' : 1});
 };
 
 module.exports.displayAboutPage = (req, res, next) => {
