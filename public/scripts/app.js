@@ -22,7 +22,9 @@
   const navContact = document.getElementById("navContact");
   const navMySurveyList = document.getElementById("navMySurvey");
   const navs = [navHome, navAbout, navContact, navMySurveyList];
-  navs.forEach((n) => { n.classList.remove("fw-bold"); });
+  navs.forEach((n) => {
+    n.classList.remove("fw-bold");
+  });
   if (pathname.includes("/home") || pathname === "/") {
     navHome.classList.add("fw-bold");
   } else if (pathname.includes("/survey-list")) {

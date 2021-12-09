@@ -1,7 +1,7 @@
 <%- include ../partials/header.ejs %>
 <%- include ../partials/main-nav.ejs %>
 <!-- Display list of survey questions -->
-<h1 class="text-center"> Survey Questions </h1>
+<h1 class="text-center"> <%=title%> </h1>
 <main class="container">
   <table class="table table-bordered table-striped table-hover">
         <!-- Header Row-->
@@ -21,6 +21,13 @@
             <% } %>
           </tr>
       </table>
+      <br>
+      <br>
+      <h2>Download Survey Responses</h2>
+      <!--<button onclick="exportData()">Download</button>-->
+      <a href="/survey-list/download" class="btn btn-primary btn-sm">Download</a>
+      
+
 </main>
 
 <%- include ../partials/bottom-nav.ejs %>

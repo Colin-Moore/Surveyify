@@ -1,6 +1,7 @@
 let express = require("express");
 let router = express.Router();
 let mongoose = require("mongoose");
+let XLSX = require("xlsx");
 
 let passport = require("passport");
 
@@ -73,6 +74,9 @@ router.get("/updateQ/:id", requireAuth, surveyController.displayEditQuestion);
 router.post("/updateQ/:id", requireAuth, surveyController.processEditQuestion);
 
 /* GET route for displaying VIEW page - READ */
-router.get("/view/:id", surveyController.showSurvey);
+router.get("/view/:id", requireAuth, surveyController.showSurvey);
+
+/* GET route for downloading survey results */
+router.get("/download", requireAuth, surveyController.downloadSurvey);
 
 module.exports = router;
