@@ -11,7 +11,8 @@ let userModel = require("../models/user");
 let User = userModel.User;
 
 module.exports.displayHomePage = (req, res, next) => {
-  Survey.find({isPublished: "true"}, (err, surveyList) => {
+  let currentDate = new Date().toISOString();
+  Survey.find({isPublished: "true", expirationDate: {$gte: currentDate}}, (err, surveyList) =>{
     if (err) {
       return console.error(err);
     } else {
