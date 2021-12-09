@@ -95,10 +95,12 @@ module.exports.displayMCQuestionPage = (req, res, next) => {
       surveyQuestion: req.body.surveyQuestion,
       description: req.body.description,
     });
+    let optionsText = new Option({
+    });
     res.render("survey/addMCquestion", {
       title: "Add Question",
       question: newQuestion,
-      OptionList: "Empty",
+      OptionList: optionsText,
       username: req.user ? req.user.username : "",
   });
 });
@@ -128,6 +130,7 @@ module.exports.processMCQuestionPage = (req, res, next) => {
           
           let newOption = new Option({
             questionID: questionId,
+            surveyID: id,
             optionsText: options[x]
           });
           Option.create(newOption, (err, newOption) => {

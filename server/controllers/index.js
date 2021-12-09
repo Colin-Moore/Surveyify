@@ -5,13 +5,18 @@ let passport = require("passport");
 
 // create Survey Model instance
 const Survey = require("../models/survey");
-
+const Question = require("../models/question");
+const Answser = require("../models/answer");
+const Option = require("../models/option");
 // create User Model instance
 let userModel = require("../models/user");
+const answer = require("../models/answer");
 let User = userModel.User;
 
 module.exports.displayHomePage = (req, res, next) => {
-  Survey.find({isPublished: "true"}, (err, surveyList) => {
+  let currentDate = new Date().toISOString();
+  console.log("date  " + currentDate);
+  Survey.find({isPublished: true, expirationDate: {$gte: currentDate}}, (err, surveyList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -118,4 +123,49 @@ module.exports.processRegisterPage = (req, res, next) => {
 module.exports.performLogout = (req, res, next) => {
   req.logout();
   res.redirect("/");
+};
+
+module.exports.ShowRespondPage = (req, res, next) => {
+  let id = req.params.id;
+  Survey.findById(id, (err, currentSurvey) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    }
+    else{
+      Question.find({surveyID: id }, (err, questionList) => {
+        if (err) {
+          res.end(err);
+          return console.error(err);
+        }
+        else{
+          Option.find({surveyID: id}, (err, optionList) => {
+            if(err){
+              res.end(err);
+              return console.error(err);
+            }
+            else{
+  
+              //show update view
+              res.render("respond", {
+              title: currentSurvey.surveyName,
+              survey: currentSurvey,
+              QuestionList: questionList,
+              OptionList: optionList,
+              username: req.user ? req.user.username : "",
+            });
+          };
+        });
+      };
+    });
+  }
+  });
+};
+
+
+module.exports.ProcessRespondPage = (req, res, next) => {
+  let id = req.params.id;
+
+  
+
 };

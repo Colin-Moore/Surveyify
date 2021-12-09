@@ -28,4 +28,8 @@ router.post("/register", indexController.processRegisterPage);
 /* GET Route to perform Logout */
 router.get("/logout", indexController.performLogout);
 
+router.get("/respond/:id", indexController.ShowRespondPage);
+
+router.post("/respond/:id", indexController.ProcessRespondPage);
+
 module.exports = router;

@@ -73,6 +73,6 @@ router.get("/updateQ/:id", requireAuth, surveyController.displayEditQuestion);
 router.post("/updateQ/:id", requireAuth, surveyController.processEditQuestion);
 
 /* GET route for displaying VIEW page - READ */
-router.get("/view/:id", surveyController.showSurvey);
+router.get("/view/:id", requireAuth, surveyController.showSurvey);
 
 module.exports = router;

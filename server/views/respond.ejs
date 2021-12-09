@@ -1,0 +1,40 @@
+<%- include partials/header.ejs %>
+
+  <%- include partials/main-nav.ejs %>
+
+<main class="container">
+
+<h1><%= title %></h1>
+
+<% x = 0 %>
+<form class="form" method="POST">
+
+  <% for(let count = 0; count < QuestionList.length; count++) { %>
+
+    <br><br>
+    <fieldset name="answer">
+
+    <h1><%= QuestionList[count].surveyQuestion %></h1>
+    <br>
+
+    <% for(let x = 0; x < OptionList.length; x++) { %>
+
+      <% if(OptionList[x].questionID == QuestionList[count]._id){ %>
+      
+        <input type="radio" name="option<%- count %>" id="test"><%= OptionList[x].optionsText %></input>
+        <br>
+
+        <% } %>
+    <% } %>
+  
+  </fieldset>
+  <% } %>
+
+  <button style="margin-top: 30px;" type="submit">Submit Survey</button>
+</form>
+
+</main>
+
+<%- include partials/bottom-nav.ejs %> 
+
+<%- include partials/footer %>

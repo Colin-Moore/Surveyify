@@ -1,3 +1,5 @@
+const question = require("../../server/models/question");
+ 
 // IIFE -- Immediately Invoked Function Expression
 (function () {
   function Start() {
@@ -42,5 +44,21 @@ function classToggle() {
   nav.forEach((nav) => nav.classList.toggle("navbar_toggleShow"));
 }
 
-// Event Listeners
-document.querySelector(".hamburger").addEventListener("click", classToggle);
+function AddSelection(){
+  let option1 = document.getElementById("selectionBox");
+  //let questionpage = document.getElementById("responseOptions");
+  let choiceContainer = document.createElement("div");
+  choiceContainer.className = "form-group";
+  let choiceLabel = document.createElement("label");
+  choiceLabel.textContent = "Option";
+  let choiceText = document.createElement("input");
+  choiceText.type = "text";
+  choiceText.value="";
+  choiceText.className = "form-control";
+  choiceText.name = "optiontext";
+  choiceText.required = "true";
+  choiceText.title = "field cannot be blank";  
+  choiceContainer.appendChild(choiceLabel);
+  choiceContainer.appendChild(choiceText);
+  option1.appendChild(choiceContainer);
+}

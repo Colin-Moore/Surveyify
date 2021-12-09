@@ -3,6 +3,7 @@ let mongoose = require ("mongoose");
 let optionModel = mongoose.Schema(
   {
     questionID: String,
+    surveyID: String,
     optionsText: String,
     optionsValue: Number
   },
