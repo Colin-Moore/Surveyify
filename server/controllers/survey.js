@@ -505,9 +505,9 @@ module.exports.downloadSurvey = (req, res, next) => {
             const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
     
             for(let r = 0; r < singleAnswer.length; r++){
-              //console.log(countOccurrences(answers, singleAnswer[r]));
+              console.log(countOccurrences(answers, singleAnswer[r]));
               question['Responses' + (r+1)] = countOccurrences(answers, singleAnswer[r]);
-              question['Option' + (r+1)] = answers[r];
+              question['Option' + (r+1)] = singleAnswer[r];
             }
            
           }
