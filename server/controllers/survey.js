@@ -128,6 +128,7 @@ module.exports.processMCQuestionPage = (req, res, next) => {
       let x = 0;
       options.forEach(() => {
         let newOption = new Option({
+          surveyID: id,
           questionID: questionId,
           optionsText: options[x],
         });
@@ -287,7 +288,7 @@ module.exports.processAddPage = (req, res, next) => {
     surveyName: req.body.surveyName,
     userID: req.user._id,
     username: req.user.username,
-    startDate: new Date(req.body.startDate),
+    startDate: req.body.startDate,
     expirationDate: new Date(req.body.expirationDate),
     isPublished: true,
   });
@@ -308,7 +309,8 @@ module.exports.processSavePage = (req, res, next) => {
     surveyName: req.body.surveyName,
     userID: req.user._id,
     username: req.user.username,
-    expirationDate: req.body.expirationDate,
+    startDate: req.body.startDate,
+    expirationDate: new Date(req.body.expirationDate),
     isPublished: false,
   });
 
@@ -340,6 +342,8 @@ module.exports.displayUpdatePage = (req, res, next) => {
             title: "Update Survey",
             survey: updateSurvey,
             QuestionList: questionList,
+            startDate: updateSurvey.startDate,
+            expirationDate: new Date(req.body.expirationDate),
             username: req.user ? req.user.username : "",
           });
         }
@@ -357,7 +361,8 @@ module.exports.publishSavedSurvey = (req, res, next) => {
     surveyName: req.body.surveyName,
     userID: req.user.userID,
     userName: req.user.userName,
-    expirationDate: req.body.expirationDate,
+    startDate: new Date(req.body.startDate),
+    expirationDate: new Date(req.body.expirationDate),
     isPublished: true,
   });
 

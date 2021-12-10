@@ -47,10 +47,8 @@ function classToggle() {
   nav.forEach((nav) => nav.classList.toggle("navbar_toggleShow"));
 }
 
+//add another option text box to the list for multiple choice questions
 function AddSelection(){
- // let options = document.getElementsByName("optiontext");
-  //let option = document.getElementById("responseOptions");
-
   let optionContainer = document.createElement("LI");
 
   let optionLabel = document.createElement("label");
