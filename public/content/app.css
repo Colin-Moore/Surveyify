@@ -6,6 +6,7 @@ body {
   float: none; /* Added */
   margin-bottom: 1rem; /* Added */
   margin-top: 6rem;
+  text-align: center;
   background-color: rgba(145, 165, 181, 1);
   border-radius: 5%;
 }

@@ -1,3 +1,6 @@
+const option = require("../../server/models/option");
+const question = require("../../server/models/question");
+ 
 // IIFE -- Immediately Invoked Function Expression
 (function () {
   function Start() {
@@ -22,7 +25,9 @@
   const navContact = document.getElementById("navContact");
   const navMySurveyList = document.getElementById("navMySurvey");
   const navs = [navHome, navAbout, navContact, navMySurveyList];
-  navs.forEach((n) => { n.classList.remove("fw-bold"); });
+  navs.forEach((n) => {
+    n.classList.remove("fw-bold");
+  });
   if (pathname.includes("/home") || pathname === "/") {
     navHome.classList.add("fw-bold");
   } else if (pathname.includes("/survey-list")) {
@@ -42,5 +47,25 @@ function classToggle() {
   nav.forEach((nav) => nav.classList.toggle("navbar_toggleShow"));
 }
 
-// Event Listeners
-document.querySelector(".hamburger").addEventListener("click", classToggle);
+function AddSelection(){
+ // let options = document.getElementsByName("optiontext");
+  //let option = document.getElementById("responseOptions");
+
+  let optionContainer = document.createElement("LI");
+
+  let optionLabel = document.createElement("label");
+  optionLabel.textContent = "Option";
+  let optionText = document.createElement("input");
+  optionText.type = "text";
+  optionText.value=" ";
+  optionText.className = "form-control";
+  optionText.name = "optiontext";
+  optionText.required = "true";
+  optionText.title = "field cannot be blank"; 
+
+  optionContainer.appendChild(optionLabel);
+  optionContainer.appendChild(optionText);
+
+  document.getElementById("list").appendChild(optionContainer);
+
+}

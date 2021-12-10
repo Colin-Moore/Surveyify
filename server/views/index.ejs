@@ -30,7 +30,7 @@
                   <%= SurveyList[count].expirationDate %>
                 </td>
                 <td class="text-center col-3">
-                  <a href="#>" class="btn btn-warning">Respond</a>
+                  <a href="respond/<%= SurveyList[count]._id %>" class="btn btn-warning">Respond</a>
                 </td>
                 
               </tr>
@@ -42,4 +42,4 @@
 
     <%- include partials/bottom-nav.ejs %>
 
-      <%- include partials/footer %>
+    <%- include partials/footer %>
