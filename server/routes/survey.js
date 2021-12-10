@@ -35,6 +35,8 @@ router.post(
   surveyController.publishSavedSurvey
 );
 
+router.post("/unpublish/:id", requireAuth, surveyController.unpublishSurvey);
+
 /* GET route for displaying UPDATE page - UPDATE Operation */
 router.get("/update/:id", requireAuth, surveyController.displayUpdatePage);
 

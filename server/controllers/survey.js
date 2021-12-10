@@ -380,6 +380,30 @@ module.exports.publishSavedSurvey = (req, res, next) => {
   });
 };
 
+module.exports.unpublishSurvey = (req, res, next) => {
+  let id = req.params.id;
+
+  let updatedSurvey = Survey({
+    _id: id,
+    surveyName: req.body.surveyName,
+    userID: req.user.userID,
+    userName: req.user.userName,
+    startDate: new Date(req.body.startDate),
+    expirationDate: new Date(req.body.expirationDate),
+    isPublished: false,
+  });
+
+  Survey.updateOne({ _id: id }, updatedSurvey, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      //refresh survey list
+      res.redirect("/survey-list");
+    }
+  });
+};
+
 module.exports.processUpdatePage = (req, res, next) => {
   let id = req.params.id;
 
