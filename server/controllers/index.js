@@ -190,7 +190,6 @@ module.exports.ProcessRespondPage = (req, res, next) => {
         }); 
         }
         else{
-          
           let shortAnswer = "shortAnswer" + x;
           console.log("DSFLKJSDJ    " + currentQuestion[x]._id);
           let answer = req.body[shortAnswer];
@@ -201,7 +200,6 @@ module.exports.ProcessRespondPage = (req, res, next) => {
           });
              
        Answer.create(newAnswer, (err, newAnswer) => {
-       
             if (err) {
             console.log(err);
             res.end(err);
