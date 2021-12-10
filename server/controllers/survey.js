@@ -7,10 +7,13 @@ let fs = require("fs");
 //Create reference to model
 let Survey = require("../models/survey");
 let Question = require("../models/question");
-let Answwer = require("../models/answer");
+let Answer = require("../models/answer");
 let Option = require("../models/option");
-const answer = require("../models/answer");
 const { json } = require("express");
+const question = require("../models/question");
+const { save } = require("debug/src/browser");
+const answer = require("../models/answer");
+const { spawn } = require("child_process");
 
 module.exports.displaySurveyList = (req, res, next) => {
   Survey.find({ userID: req.user.id }, (err, surveyList) => {
@@ -246,7 +249,7 @@ module.exports.deleteQuestion = (req, res, next) => {
       Option.find({ questionID: id }, (err, option) => {
         let x = 0;
         //get a list of all the optiontext field values on the page
-        let optionList = req.body.optiontext;
+       // let optionList = req.body.optiontext;
         //foreach loop to go through each option item in the table
         option.forEach(() => {
           //get the id of the current option object to remove
@@ -402,7 +405,37 @@ module.exports.processUpdatePage = (req, res, next) => {
 
 module.exports.performDelete = (req, res, next) => {
   let id = req.params.id;
+  Question.find({surveyID: id}, (err, question) => {
+    // if the question being removed is multiple choice, do this
+    if (question.multipleChoice == true) {
+      //find the items in the option table that have the current questionID stored
+      Option.find({ surveyID: id }, (err, option) => {
+        let x = 0;
+        //get a list of all the optiontext field values on the page
+        let optionList = req.body.optiontext;
+        //foreach loop to go through each option item in the table
+        option.forEach(() => {
+          //get the id of the current option object to remove
+          let updateID = option[x]._id;
 
+          //update option object
+          Option.remove({ _id: updateID }, (err) => {
+            if (err) {
+              console.log(err);
+              res.end(err);
+            }
+          });
+          x++;
+        });
+      });
+    }
+ 
+  Question.remove({_id: question.id}, (err) => {
+    if (err) {
+      res.end(err);
+    }
+  }); 
+});
   Survey.remove({ _id: id }, (err) => {
     if (err) {
       console.log(err);
@@ -415,80 +448,96 @@ module.exports.performDelete = (req, res, next) => {
 };
 
 module.exports.downloadSurvey = (req, res, next) => {
-  let filename = "survey_results.xlsx";
-
+  let testData = [];
   let id = req.params.id;
-  //Placeholder for JSON array of responses
-  let testData = [
+  let filename = "survey_results_" + id + ".xlsx";
+  Question.find({surveyID: id}, (err, questionList) =>{
     
-    {
-      Question: "What is your favourite colour?",
-      Option1: "Red",
-      Response1: "2",
-      Option2: "Blue",
-      Response2: "3",
-      Option3: "Yellow",
-      Response3: "4",
-      Option4: "Green",
-      Response4: "5",
-    },
-    {
-      Question: "What is your favourite food?",
-      Option1: "Chocolate",
-      Response1: "4",
-      Option2: "Cake",
-      Response2: "2",
-      Option3: "Cookies",
-      Response3: "5",
-    },
-    {
-      Question: "What is your favourite holiday?",
-      Option1: "Christmas",
-      Response1: "10",
-      Option2: "Halloween",
-      Response2: "8",
-      Option3: "Thanksgiving",
-      Response3: "5",
-    },
-    {
-      Question: "What is your favourite day of the week?",
-     Option1: "Monday",
-      Response1: "0",
-      Option2: "Tuesday",
-      Response2: "2",
-      Option3: "Wednesday",
-      Response3: "3",
-      Option4: "Thursday",
-      Response4: "4",
-      Option5: "Friday",
-      Response5: "6",
-      Option6: "Saturday",
-      Response6: "8",
-      Option7: "Sunday",
-      Response7: "6",
-    },
-  ];
+    Option.find({surveyID: id}, (err, options) => {
+      Answer.find({surveyID: id}, (err, answerList) => {
+        for(let x = 0; x < questionList.length; x++){
+      
+          let question = {};
 
-  //Create new excel workbook
- let workbook = XLSX.utils.book_new();
+          question['Question'] = questionList[x].surveyQuestion;
+          let noMatch = 0;
+          if(questionList[x].multipleChoice == true){
 
-  //Create new excel work sheet with responses
-  let worksheet = XLSX.utils.json_to_sheet(testData);
+          for(let y = 0; y < options.length; y++){
+            let count = 0;
 
-  //Writes excel file and saves to server
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Survey Results");
-  XLSX.writeFile(workbook, filename);
+            if(options[y].questionID == questionList[x]._id){
+              question['Option'+(y+1-noMatch)] = options[y].optionsText;
 
-  //Downloads file to client computer from server
-  res.download(filename, (err) => {
-    if (err) {
-      console.log(err);
-    }
-    //Deletes file from server
-    fs.unlink(filename, () => {
-      console.log("Temp file deleted");
+              for(let z = 0; z < answerList.length; z++){
+
+                if(answerList[z].optionID == options[y]._id){
+                  count ++;  
+                }  
+                question['Responses'+ (y+1-noMatch)] = count;
+                }
+              }
+              else{
+                noMatch ++;
+              }
+            }
+          }
+          else{
+            let SaQuestions = new Array();
+            let answers = new Array();
+            let singleAnswer = new Array();
+            SaQuestions.push(questionList[x])
+            for(let i = 0; i < answerList.length; i++){
+              
+              for(let x = 0; x < SaQuestions.length; x++){
+        
+                if(answerList[i].questionID === SaQuestions[x].id){
+
+                  answers.push(answerList[i].answerText);
+                  if(singleAnswer.includes(answerList[i].answerText)){
+
+                    continue;
+                  }
+                  singleAnswer.push(answerList[i].answerText);
+                }   
+              }
+            }
+            const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    
+            for(let r = 0; r < singleAnswer.length; r++){
+              //console.log(countOccurrences(answers, singleAnswer[r]));
+              question['Responses' + (r+1)] = countOccurrences(answers, singleAnswer[r]);
+              question['Option' + (r+1)] = answers[r];
+            }
+           
+          }
+            testData[x] = question;
+          }
+          
+    //Create new excel workbook
+          let workbook = XLSX.utils.book_new();
+
+            //Create new excel work sheet with responses
+          let worksheet = XLSX.utils.json_to_sheet(testData);
+
+          //Writes excel file and saves to server
+          XLSX.utils.book_append_sheet(workbook, worksheet, "Survey Results");
+          XLSX.writeFile(workbook, filename);
+
+          //Downloads file to client computer from server
+          res.download(filename, (err) => {
+          if (err) {
+            console.log(err);
+          }
+          //Deletes file from server
+          fs.unlink(filename, () => {
+            console.log("Temp file deleted");
+          });
+        }); 
+      });
     });
   });
+
 };
 
 
