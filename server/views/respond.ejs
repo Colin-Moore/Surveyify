@@ -2,39 +2,40 @@
 
   <%- include partials/main-nav.ejs %>
 
-<main class="container" style="text-align: center;">
+<main class="container"  style="text-align: center;">
 
 <h1><%= title %></h1>
-
+<hr style="width: 300px; margin-left: auto; margin-right: auto;">
 <% x = 0 %>
 <form class="form" method="POST">
 
   <% for(let count = 0; count < QuestionList.length; count++) { %>
 
-    <br><br>
-  
-    <h3><%= QuestionList[count].surveyQuestion %></h3>
-    <br>
+    
+  <div class="card" style="width: 50%; margin-left: auto; margin-right: auto; margin-top: 10px;">
+    <h3 style="padding: 5px;"><%= QuestionList[count].surveyQuestion %></h3>
+    
       <% if(QuestionList[count].multipleChoice == true) { %>
     <% for(let x = 0; x < OptionList.length; x++) { %>
-
+      <fieldset>
       <% if(OptionList[x].questionID == QuestionList[count]._id){ %>
       
-        <input type="radio" name="<%=count %>" id="test" value="<%= OptionList[x].optionsText %>"><%= OptionList[x].optionsText %></input>
+        <input type="radio" name="<%=count %>" id="radio<%=count%>" value="<%= OptionList[x].optionsText %>"> <%= OptionList[x].optionsText %></input>
         <br>
 
         <% } %>
+      </fieldset>
     <% } %>
   <% } else { %>
 
-    <input type="text" name="shortAnswer<%=count%>"></input>
-
-    <% } %>
-
-  <% } %>
+    <input type="text" style="width: 50%; margin-right: auto; margin-left: auto;" name="shortAnswer<%=count%>"></input>
 <br>
-  <button style="margin-top: 30px;" type="submit">Submit Survey</button>
+    <% } %>
+</div>
+  <% } %>
 
+  <button style="margin-top: 30px; margin-bottom: 100px;" type="submit">Submit Survey</button>
+  <a href="javascript:history.back()" class="btn btn-danger"> Cancel </a>
 </form>
 </main>
 
