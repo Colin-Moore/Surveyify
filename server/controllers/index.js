@@ -15,8 +15,7 @@ let User = userModel.User;
 
 module.exports.displayHomePage = (req, res, next) => {
   let currentDate = new Date().toISOString();
-  console.log("date  " + currentDate);
-  Survey.find({isPublished: true, expirationDate: {$gte: currentDate}}, (err, surveyList) => {
+  Survey.find({isPublished: "true", expirationDate: {$gte: currentDate}}, (err, surveyList) =>{
     if (err) {
       return console.error(err);
     } else {
@@ -27,7 +26,7 @@ module.exports.displayHomePage = (req, res, next) => {
         username: req.user ? req.user.username : "",
       });
     }
-  });
+  }).sort({'expirationDate' : 1});
 };
 
 module.exports.displayAboutPage = (req, res, next) => {
@@ -189,7 +188,6 @@ module.exports.ProcessRespondPage = (req, res, next) => {
           }
         }); 
         }
-        else{
           let shortAnswer = "shortAnswer" + x;
           console.log("DSFLKJSDJ    " + currentQuestion[x]._id);
           let answer = req.body[shortAnswer];
@@ -207,7 +205,7 @@ module.exports.ProcessRespondPage = (req, res, next) => {
           console.log(newAnswer);
         }
        }); 
-        }
+        
         x++;
       });
       res.redirect("/home");
