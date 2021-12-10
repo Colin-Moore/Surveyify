@@ -14,8 +14,10 @@ const answer = require("../models/answer");
 let User = userModel.User;
 
 module.exports.displayHomePage = (req, res, next) => {
-  let currentDate = new Date().toISOString();
-  Survey.find({isPublished: "true", expirationDate: {$gte: currentDate}}, (err, surveyList) =>{
+  let currentDate = new Date();
+  currentDate.setHours(currentDate.getHours() - 5);
+  console.log(currentDate);
+  Survey.find({isPublished: "true", startDate: {$lte: currentDate}, expirationDate: {$gte: currentDate}}, (err, surveyList) =>{
     if (err) {
       return console.error(err);
     } else {

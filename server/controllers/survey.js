@@ -9,6 +9,8 @@ let Survey = require("../models/survey");
 let Question = require("../models/question");
 let Answwer = require("../models/answer");
 let Option = require("../models/option");
+const answer = require("../models/answer");
+const { json } = require("express");
 
 module.exports.displaySurveyList = (req, res, next) => {
   Survey.find({ userID: req.user.id }, (err, surveyList) => {
@@ -120,24 +122,6 @@ module.exports.processMCQuestionPage = (req, res, next) => {
     if (err) {
       console.log(err);
       res.end(err);
-<<<<<<< HEAD
-      }
-      else
-      {
-        let questionId = newQuestion._id;
-        let options = req.body.optiontext;
-        let x = 0
-        options.forEach(() =>{
-          
-          let newOption = new Option({
-            questionID: questionId,
-            surveyID: id,
-            multipleChoice: false,
-            optionsText: options[x]
-          });
-          Option.create(newOption, (err, newOption) => {
-            if(err){
-=======
     } else {
       let questionId = newQuestion._id;
       let options = req.body.optiontext;
@@ -149,7 +133,6 @@ module.exports.processMCQuestionPage = (req, res, next) => {
         });
         Option.create(newOption, (err, newOption) => {
           if (err) {
->>>>>>> a0fdc5298501e05ea26f6935555b54720b56583d
             console.log(err);
             res.end(err);
           }
@@ -303,7 +286,8 @@ module.exports.processAddPage = (req, res, next) => {
     surveyName: req.body.surveyName,
     userID: req.user._id,
     username: req.user.username,
-    expirationDate: req.body.expirationDate,
+    startDate: new Date(req.body.startDate),
+    expirationDate: new Date(req.body.expirationDate),
     isPublished: true,
   });
 
@@ -395,7 +379,8 @@ module.exports.processUpdatePage = (req, res, next) => {
     surveyName: req.body.surveyName,
     userID: req.user.userID,
     userName: req.user.userName,
-    expirationDate: req.body.expirationDate,
+    startDate: new Date(req.body.startDate),
+    expirationDate: new Date(req.body.expirationDate),
   });
 
   Survey.updateOne({ _id: id }, updatedSurvey, (err) => {
@@ -426,8 +411,10 @@ module.exports.performDelete = (req, res, next) => {
 module.exports.downloadSurvey = (req, res, next) => {
   let filename = "survey_results.xlsx";
 
+  let id = req.params.id;
   //Placeholder for JSON array of responses
   let testData = [
+    
     {
       Question: "What is your favourite colour?",
       Option1: "Red",
@@ -459,7 +446,7 @@ module.exports.downloadSurvey = (req, res, next) => {
     },
     {
       Question: "What is your favourite day of the week?",
-      Option1: "Monday",
+     Option1: "Monday",
       Response1: "0",
       Option2: "Tuesday",
       Response2: "2",
@@ -477,7 +464,7 @@ module.exports.downloadSurvey = (req, res, next) => {
   ];
 
   //Create new excel workbook
-  let workbook = XLSX.utils.book_new();
+ let workbook = XLSX.utils.book_new();
 
   //Create new excel work sheet with responses
   let worksheet = XLSX.utils.json_to_sheet(testData);
@@ -498,4 +485,5 @@ module.exports.downloadSurvey = (req, res, next) => {
   });
 };
 
-/*Jeffrey Sy 980045498 */
+
+/*Jeffrey S 980045498 */

@@ -47,9 +47,9 @@ function classToggle() {
 }
 
 function AddSelection(){
+  var x = document.getElementById("list").lastElementChild;
   let option1 = document.getElementById("selectionBox");
-  //let questionpage = document.getElementById("responseOptions");
-  let choiceContainer = document.createElement("div");
+  let choiceContainer = document.createElement("li");
   choiceContainer.className = "form-group";
   let choiceLabel = document.createElement("label");
   choiceLabel.textContent = "Option";
@@ -62,5 +62,5 @@ function AddSelection(){
   choiceText.title = "field cannot be blank";  
   choiceContainer.appendChild(choiceLabel);
   choiceContainer.appendChild(choiceText);
-  option1.appendChild(choiceContainer);
+  x.append(choiceContainer);
 }

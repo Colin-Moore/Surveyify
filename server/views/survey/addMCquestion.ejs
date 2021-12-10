@@ -11,33 +11,41 @@
                 </h1>
                 
                 <form class="form" method="POST">
-                    <div class="form-group" id="responseOptions">
+                    <ul id="list" style="list-style-type: none;">
+                    <li class="form-group" id="responseOptions">
                         <label for="questionTextField">Question</label>
                         <input type="text" class="form-control" id="questionTextField" value="<%= question.surveyQuestion %>" name="surveyQuestion"  required pattern=".*\S+.*"title="field cannot be blank" >
-                    </div>
+                    </li>
                     <% if(OptionList.length == null){ %>
                         
-                        <div class="form-group" id="selectionBox">
+                        <li class="form-group" id="selectionBox">
                             <label for="optiontext">Option </label>
-                            <input type="text" class="form-control" name="optiontext" value="" id="TextField1"    required pattern=".*\S+.*"title="field cannot be blank" >
-                        </div>
+                            <input type="text" class="form-control" name="optiontext" value="" id="TextField"    required pattern=".*\S+.*"title="field cannot be blank" >
+                        </li>
+                        <li class="form-group" id="selectionBox">
+                            <label for="optiontext">Option </label>
+                            <input type="text" class="form-control" name="optiontext" value="" id="TextField"    required pattern=".*\S+.*"title="field cannot be blank" >
+                        </li>
                         <% } else { %>
                     <% for(let count = 0; count < OptionList.length; count++) { %>
                        
-                    <div class="form-group" id="selectionBox">
-                        <label for="optiontext">Selection <%= count + 1%></label>
-                        <input type="text" class="form-control" name="optiontext" value="<%= OptionList[count].optionsText %>" id="TextField1"    required pattern=".*\S+.*"title="field cannot be blank" >
-                    </div>
+                    <li class="form-group" id="selectionBox">
+                        <label for="optiontext">Option</label>
+                        <input type="text" class="form-control" name="optiontext" value="<%= OptionList[count].optionsText %>" id="TextField<%=count%>" required pattern=".*\S+.*"title="field cannot be blank" >
+                    </li>
+                    
                     <%}%>
                     <% } %>
                     <br>
                     <button class="btn btn-primary" type="button" id="selectionButton" onclick="AddSelection()">Add Another Option</button>
                     <br>
                     <br>
+                </ul>
                     <button class="btn btn-primary" type="submit">
                         <i class="fas fa-save"></i> Submit
                     </button>
                     <a href="javascript:history.back()" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</a>
+                
                 </form>
 
             </div>

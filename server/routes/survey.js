@@ -75,11 +75,8 @@ router.post("/updateQ/:id", requireAuth, surveyController.processEditQuestion);
 
 /* GET route for displaying VIEW page - READ */
 router.get("/view/:id", requireAuth, surveyController.showSurvey);
-<<<<<<< HEAD
-=======
 
 /* GET route for downloading survey results */
-router.get("/download", requireAuth, surveyController.downloadSurvey);
->>>>>>> a0fdc5298501e05ea26f6935555b54720b56583d
+router.get("/download/:id", requireAuth, surveyController.downloadSurvey);
 
 module.exports = router;
