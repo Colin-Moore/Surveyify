@@ -214,6 +214,7 @@ module.exports.processEditQuestion = (req, res, next) => {
 
               let updatedOption = Option({
                 _id: updateID,
+                surveyID: returnSurvey,
                 optionsText: optionList[x],
               });
               //update option object

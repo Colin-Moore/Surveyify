@@ -1,3 +1,4 @@
+const option = require("../../server/models/option");
 const question = require("../../server/models/question");
  
 // IIFE -- Immediately Invoked Function Expression
@@ -47,20 +48,24 @@ function classToggle() {
 }
 
 function AddSelection(){
-  var x = document.getElementById("list").lastElementChild;
-  let option1 = document.getElementById("selectionBox");
-  let choiceContainer = document.createElement("li");
-  choiceContainer.className = "form-group";
-  let choiceLabel = document.createElement("label");
-  choiceLabel.textContent = "Option";
-  let choiceText = document.createElement("input");
-  choiceText.type = "text";
-  choiceText.value="";
-  choiceText.className = "form-control";
-  choiceText.name = "optiontext";
-  choiceText.required = "true";
-  choiceText.title = "field cannot be blank";  
-  choiceContainer.appendChild(choiceLabel);
-  choiceContainer.appendChild(choiceText);
-  x.append(choiceContainer);
+ // let options = document.getElementsByName("optiontext");
+  //let option = document.getElementById("responseOptions");
+
+  let optionContainer = document.createElement("LI");
+
+  let optionLabel = document.createElement("label");
+  optionLabel.textContent = "Option";
+  let optionText = document.createElement("input");
+  optionText.type = "text";
+  optionText.value=" ";
+  optionText.className = "form-control";
+  optionText.name = "optiontext";
+  optionText.required = "true";
+  optionText.title = "field cannot be blank"; 
+
+  optionContainer.appendChild(optionLabel);
+  optionContainer.appendChild(optionText);
+
+  document.getElementById("list").appendChild(optionContainer);
+
 }

@@ -11,41 +11,45 @@
                 </h1>
                 
                 <form class="form" method="POST">
-                    <ul id="list" style="list-style-type: none;">
+                    
+                <ul id="list" style="list-style-type: none;">
                     <li class="form-group" id="responseOptions">
                         <label for="questionTextField">Question</label>
                         <input type="text" class="form-control" id="questionTextField" value="<%= question.surveyQuestion %>" name="surveyQuestion"  required pattern=".*\S+.*"title="field cannot be blank" >
                     </li>
+                    <hr style="width: 100%; margin-left: auto; margin-right: auto;"
                     <% if(OptionList.length == null){ %>
                         
-                        <li class="form-group" id="selectionBox">
+                        <li  id="selectionBox">
                             <label for="optiontext">Option </label>
                             <input type="text" class="form-control" name="optiontext" value="" id="TextField"    required pattern=".*\S+.*"title="field cannot be blank" >
                         </li>
-                        <li class="form-group" id="selectionBox">
+                        <li  id="selectionBox">
                             <label for="optiontext">Option </label>
                             <input type="text" class="form-control" name="optiontext" value="" id="TextField"    required pattern=".*\S+.*"title="field cannot be blank" >
                         </li>
                         <% } else { %>
                     <% for(let count = 0; count < OptionList.length; count++) { %>
                        
-                    <li class="form-group" id="selectionBox">
+                    <li  id="selectionBox">
                         <label for="optiontext">Option</label>
                         <input type="text" class="form-control" name="optiontext" value="<%= OptionList[count].optionsText %>" id="TextField<%=count%>" required pattern=".*\S+.*"title="field cannot be blank" >
                     </li>
                     
                     <%}%>
                     <% } %>
-                    <br>
-                    <button class="btn btn-primary" type="button" id="selectionButton" onclick="AddSelection()">Add Another Option</button>
-                    <br>
-                    <br>
+                    
                 </ul>
+                <br>
+                    <br>
+                    <br>
+                    <div style="margin-bottom: 100px;">
                     <button class="btn btn-primary" type="submit">
                         <i class="fas fa-save"></i> Submit
                     </button>
                     <a href="javascript:history.back()" class="btn btn-danger"><i class="fas fa-undo"></i> Cancel</a>
-                
+                    <button class="btn btn-primary" style="margin-left:30%;" type="button" id="selectionButton" onclick="AddSelection()">Add Another Option</button>
+                </div>
                 </form>
 
             </div>
