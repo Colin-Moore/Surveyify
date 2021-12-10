@@ -175,8 +175,9 @@ module.exports.ProcessRespondPage = (req, res, next) => {
         if(currentQuestion[x].multipleChoice == true){
           let options = req.body[x];
           let newAnswer = new Answer({
+            surveyID: id,
             questionID: currentQuestion[x]._id,
-            answerText: options,
+            optionID: options,
             answerDate: currentDate,
           });
           
@@ -194,6 +195,7 @@ module.exports.ProcessRespondPage = (req, res, next) => {
           console.log("DSFLKJSDJ    " + currentQuestion[x]._id);
           let answer = req.body[shortAnswer];
           let newAnswer = new Answer({
+            surveyID: id,
             questionID: currentQuestion[x]._id,
             answerText: answer,
             answerDate: currentDate,

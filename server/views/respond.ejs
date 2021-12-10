@@ -20,7 +20,7 @@
       <fieldset>
       <% if(OptionList[x].questionID == QuestionList[count]._id){ %>
       
-        <input type="radio" name="<%=count %>" id="radio<%=count%>" value="<%= OptionList[x].optionsText %>"> <%= OptionList[x].optionsText %></input>
+        <input type="radio" name="<%=count %>" id="radio<%=count%>" value="<%= OptionList[x]._id %>"> <%= OptionList[x].optionsText %></input>
         <br>
 
         <% } %>
