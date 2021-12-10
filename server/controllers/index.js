@@ -6,7 +6,7 @@ let passport = require("passport");
 // create Survey Model instance
 const Survey = require("../models/survey");
 const Question = require("../models/question");
-const Answser = require("../models/answer");
+const Answer = require("../models/answer");
 const Option = require("../models/option");
 // create User Model instance
 let userModel = require("../models/user");
@@ -134,38 +134,84 @@ module.exports.ShowRespondPage = (req, res, next) => {
     }
     else{
       Question.find({surveyID: id }, (err, questionList) => {
-        if (err) {
-          res.end(err);
-          return console.error(err);
-        }
-        else{
-          Option.find({surveyID: id}, (err, optionList) => {
-            if(err){
-              res.end(err);
-              return console.error(err);
-            }
-            else{
-  
-              //show update view
-              res.render("respond", {
-              title: currentSurvey.surveyName,
-              survey: currentSurvey,
-              QuestionList: questionList,
-              OptionList: optionList,
-              username: req.user ? req.user.username : "",
-            });
-          };
-        });
-      };
-    });
-  }
+      if (err) {
+        res.end(err);
+        return console.error(err);
+      }
+      else{
+        Option.find({surveyID: id}, (err, optionList) => {
+          if(err){
+            res.end(err);
+            return console.error(err);
+          }
+          else{
+ 
+            //show update view
+            res.render("respond", {
+            title: currentSurvey.surveyName,
+            survey: currentSurvey,
+            QuestionList: questionList,
+            OptionList: optionList,
+            username: req.user ? req.user.username : "",
+          });
+        };
+      });
+    };
+  });
+}
   });
 };
 
 
 module.exports.ProcessRespondPage = (req, res, next) => {
   let id = req.params.id;
+  let currentDate = new Date().toISOString();
 
-  
+  let x = 0;
 
-};
+    Question.find({surveyID: id}, (err, currentQuestion) => {
+      currentQuestion.forEach(() => {
+        if(currentQuestion[x].multipleChoice == true){
+          let options = req.body[x];
+          let newAnswer = new Answer({
+            questionID: currentQuestion[x]._id,
+            answerText: options,
+            answerDate: currentDate,
+          });
+          
+       Answer.create(newAnswer, (err, newAnswer) => {
+      
+          if (err) {
+            console.log(err);
+            res.end(err);
+          } else {
+            console.log(newAnswer);
+          }
+        }); 
+        }
+        else{
+          
+          let shortAnswer = "shortAnswer" + x;
+          console.log("DSFLKJSDJ    " + currentQuestion[x]._id);
+          let answer = req.body[shortAnswer];
+          let newAnswer = new Answer({
+            questionID: currentQuestion[x]._id,
+            answerText: answer,
+            answerDate: currentDate,
+          });
+             
+       Answer.create(newAnswer, (err, newAnswer) => {
+       
+            if (err) {
+            console.log(err);
+            res.end(err);
+            } else {
+          console.log(newAnswer);
+        }
+       }); 
+        }
+        x++;
+      });
+      res.redirect("/home");
+    });
+  };

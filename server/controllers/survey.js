@@ -131,6 +131,7 @@ module.exports.processMCQuestionPage = (req, res, next) => {
           let newOption = new Option({
             questionID: questionId,
             surveyID: id,
+            multipleChoice: false,
             optionsText: options[x]
           });
           Option.create(newOption, (err, newOption) => {
