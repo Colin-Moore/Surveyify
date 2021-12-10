@@ -55,6 +55,7 @@ function AddSelection(){
   optionLabel.textContent = "Option";
   let optionText = document.createElement("input");
   optionText.type = "text";
+  optionText.pattern=`.*\\S+.*`;
   optionText.value=" ";
   optionText.className = "form-control";
   optionText.name = "optiontext";
@@ -65,5 +66,16 @@ function AddSelection(){
   optionContainer.appendChild(optionText);
 
   document.getElementById("list").appendChild(optionContainer);
+}
 
+function RemoveSelection(){
+  let items = document.querySelectorAll("li");
+  
+  if(items.length == 2) {
+    alert("You must have at least two options!");
+  }
+  else{
+  let list = document.getElementById("list");
+  list.removeChild(list.lastChild);
+  }
 }
