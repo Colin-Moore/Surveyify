@@ -38,7 +38,12 @@
                             Publish
                         </button>
                          <br>
-                        <% } %>
+                        <% } else { %>
+                            <button class="btn btn-warning" formaction="/survey-list/unpublish/<%=survey._id%>">
+                                Unpublish
+                            </button>
+                             <br>
+                             <% } %>
                    
                     <br>
                     <hr style="height:5px">                   
