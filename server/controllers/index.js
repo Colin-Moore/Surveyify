@@ -181,7 +181,7 @@ module.exports.ProcessRespondPage = (req, res, next) => {
             answerDate: currentDate,
           });
           
-       Answer.create(newAnswer, (err, newAnswer) => {
+     /*  Answer.create(newAnswer, (err, newAnswer) => {
       
           if (err) {
             console.log(err);
@@ -189,10 +189,9 @@ module.exports.ProcessRespondPage = (req, res, next) => {
           } else {
             console.log(newAnswer);
           }
-        }); 
+        }); */
         }
           let shortAnswer = "shortAnswer" + x;
-          console.log("DSFLKJSDJ    " + currentQuestion[x]._id);
           let answer = req.body[shortAnswer];
           let newAnswer = new Answer({
             surveyID: id,

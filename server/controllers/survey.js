@@ -569,19 +569,19 @@ module.exports.displayResultsPage = (req,res, next) => {
   let counts = new Array();
   let id = req.params.id;
   Question.find({surveyID: id}, (err, questionList) =>{
-    Option.find({surveyID: id}, (err, options) => {
       Answer.find({surveyID: id}, (err, answerList) => {
         for(let y = 0; y < questionList.length; y++){
-          let counter = 1;
+          let counter = 0;
           for(let x = 0; x < answerList.length; x++){
             if(answerList[x].questionID == questionList[y].id){
+             
               counter++;
+
             }
           }
           counts.push(counter); 
         }
        
-          console.log(counts);
     //Create new excel workbook
     res.render("survey/results", {
       title: "Survey Counts",
@@ -591,8 +591,6 @@ module.exports.displayResultsPage = (req,res, next) => {
     });
       });
     });
-  });
-
 };
 
 
