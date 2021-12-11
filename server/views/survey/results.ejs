@@ -1,0 +1,32 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/main-nav.ejs %>
+<!-- Display list of survey questions -->
+<h1 class="text-center"> <%=title%> </h1>
+<main class="container">
+  <table class="table table-bordered table-striped table-hover">
+        <!-- Header Row-->
+        <tr>
+          <th style="width:9%" class="text-center">Question #</th>
+          <th class="text-center">Question</th>          
+          <th class="text-center">Total Answers</th>   
+        </tr>
+        <!-- Repeatable Template Row-->
+        <% for(let count = 0; count < QuestionList.length; count++) { %>
+          <tr>
+            <td class="text-center"><%- count + 1 %></td>
+            <td class="text-center"><%- QuestionList[count].surveyQuestion %></td>   
+            <td class="text-center"><%- Counts[count] %></td>   
+            <% } %>
+          </tr>
+      </table>
+      <br>
+      <br>
+      <h2>Download Detailed Results</h2>
+      <!--<button onclick="exportData()">Download</button>-->
+      <a href="/survey-list/download/<%=QuestionList[0].surveyID%>"" class="btn btn-primary btn-sm">Download</a>
+      
+
+</main>
+
+<%- include ../partials/bottom-nav.ejs %>
+<%- include ../partials/footer.ejs %>

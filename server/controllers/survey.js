@@ -505,7 +505,6 @@ module.exports.downloadSurvey = (req, res, next) => {
             const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
     
             for(let r = 0; r < singleAnswer.length; r++){
-              console.log(countOccurrences(answers, singleAnswer[r]));
               question['Responses' + (r+1)] = countOccurrences(answers, singleAnswer[r]);
               question['Option' + (r+1)] = singleAnswer[r];
             }
@@ -534,6 +533,38 @@ module.exports.downloadSurvey = (req, res, next) => {
             console.log("Temp file deleted");
           });
         }); 
+      });
+    });
+  });
+
+};
+
+
+module.exports.displayResultsPage = (req,res, next) => {
+
+  let counts = new Array();
+  let id = req.params.id;
+  Question.find({surveyID: id}, (err, questionList) =>{
+    Option.find({surveyID: id}, (err, options) => {
+      Answer.find({surveyID: id}, (err, answerList) => {
+        for(let y = 0; y < questionList.length; y++){
+          let counter = 1;
+          for(let x = 0; x < answerList.length; x++){
+            if(answerList[x].questionID == questionList[y].id){
+              counter++;
+            }
+          }
+          counts.push(counter); 
+        }
+       
+          console.log(counts);
+    //Create new excel workbook
+    res.render("survey/results", {
+      title: "Survey Counts",
+      QuestionList: questionList,
+      Counts: counts,
+      username: req.user ? req.user.username : "",
+    });
       });
     });
   });

@@ -79,4 +79,6 @@ router.get("/view/:id", requireAuth, surveyController.showSurvey);
 /* GET route for downloading survey results */
 router.get("/download/:id", requireAuth, surveyController.downloadSurvey);
 
+router.get("/results/:id", requireAuth, surveyController.displayResultsPage);
+
 module.exports = router;
