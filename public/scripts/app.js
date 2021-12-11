@@ -1,6 +1,4 @@
-const option = require("../../server/models/option");
-const question = require("../../server/models/question");
- 
+
 // IIFE -- Immediately Invoked Function Expression
 (function () {
   function Start() {
