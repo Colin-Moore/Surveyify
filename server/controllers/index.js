@@ -168,10 +168,10 @@ module.exports.ProcessRespondPage = (req, res, next) => {
   let id = req.params.id;
   let currentDate = new Date().toISOString();
 
-  let x = 0;
 
     Question.find({surveyID: id}, (err, currentQuestion) => {
-      currentQuestion.forEach(() => {
+     // console.log("!  " + currentQuestion);
+      for(let x = 0; x < currentQuestion.length; x++){
         if(currentQuestion[x].multipleChoice == true){
           let options = req.body[x];
           let newAnswer = new Answer({
@@ -180,37 +180,38 @@ module.exports.ProcessRespondPage = (req, res, next) => {
             optionID: options,
             answerDate: currentDate,
           });
-          
-     /*  Answer.create(newAnswer, (err, newAnswer) => {
+         // console.log("MC  " + newAnswer);
+      Answer.create(newAnswer, (err, newAnswer) => {
       
           if (err) {
             console.log(err);
             res.end(err);
           } else {
-            console.log(newAnswer);
+           // console.log("12:   " + newAnswer);
           }
-        }); */
+        }); 
         }
+        else{
           let shortAnswer = "shortAnswer" + x;
           let answer = req.body[shortAnswer];
-          let newAnswer = new Answer({
+          let saAnswer = new Answer({
             surveyID: id,
             questionID: currentQuestion[x]._id,
             answerText: answer,
             answerDate: currentDate,
           });
-             
-       Answer.create(newAnswer, (err, newAnswer) => {
+         // console.log("SA   " + saAnswer);
+       
+       Answer.create(saAnswer, (err, saAnswer) => {
             if (err) {
             console.log(err);
             res.end(err);
             } else {
-          console.log(newAnswer);
+         // console.log(newAnswer);
         }
        }); 
-        
-        x++;
-      });
+      }
+      }
       res.redirect("/home");
     });
   };

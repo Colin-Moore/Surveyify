@@ -470,7 +470,6 @@ module.exports.performDelete = (req, res, next) => {
     }
   });
 };
-
 module.exports.downloadSurvey = (req, res, next) => {
   let testData = [];
   let id = req.params.id;
@@ -564,6 +563,7 @@ module.exports.downloadSurvey = (req, res, next) => {
 };
 
 
+
 module.exports.displayResultsPage = (req,res, next) => {
 
   let counts = new Array();
@@ -591,6 +591,7 @@ module.exports.displayResultsPage = (req,res, next) => {
     });
       });
     });
+
 };
 
 
